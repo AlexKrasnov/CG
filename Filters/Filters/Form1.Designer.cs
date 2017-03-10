@@ -117,6 +117,7 @@
             this.инверсияToolStripMenuItem.Name = "инверсияToolStripMenuItem";
             this.инверсияToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.инверсияToolStripMenuItem.Text = "Инверсия";
+            this.инверсияToolStripMenuItem.Click += new System.EventHandler(this.инверсияToolStripMenuItem_Click);
             // 
             // pictureBox2
             // 
@@ -135,6 +136,7 @@
             this.button1.TabIndex = 5;
             this.button1.Text = "Отмена";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // progressBar1
             // 
@@ -147,6 +149,9 @@
             // 
             this.backgroundWorker1.WorkerReportsProgress = true;
             this.backgroundWorker1.WorkerSupportsCancellation = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
             // Form1
             // 
