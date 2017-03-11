@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Filters
 {
-    class MatrixFilter : Filters
+    class MatrixFilter : Filters // Матричные фильтры
     {
         protected float[,] kernel = null;
         protected MatrixFilter() { }

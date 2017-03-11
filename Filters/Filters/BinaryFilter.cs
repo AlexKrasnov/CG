@@ -7,13 +7,16 @@ using System.Drawing;
 
 namespace Filters
 {
-    class GrayScaleFilter : Filters // Черно-белое
+    class BinaryFilter : Filters // В бинарное изображение
     {
         protected override Color calculateNewPixelColor(Bitmap sourseImage, int x, int y)
         {
             Color sourseColor = sourseImage.GetPixel(x, y);
-            int Intensity = (int)(0.213 * sourseColor.R + 0.715 * sourseColor.G + 0.072 * sourseColor.B);
-            Color resultColor = Color.FromArgb(Intensity, Intensity, Intensity);
+            Color resultColor;
+            if (sourseColor.R < 127 && sourseColor.G < 127 && sourseColor.B < 127)
+                resultColor = Color.FromArgb(0, 0, 0);
+            else
+                resultColor = Color.FromArgb(255, 255, 255);
             return resultColor;
         }
     }

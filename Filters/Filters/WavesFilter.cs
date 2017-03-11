@@ -7,14 +7,14 @@ using System.Drawing;
 
 namespace Filters
 {
-    class GrayScaleFilter : Filters // Черно-белое
+    class WavesFilter : Filters // Эффект "волны"
     {
         protected override Color calculateNewPixelColor(Bitmap sourseImage, int x, int y)
         {
             Color sourseColor = sourseImage.GetPixel(x, y);
-            int Intensity = (int)(0.213 * sourseColor.R + 0.715 * sourseColor.G + 0.072 * sourseColor.B);
-            Color resultColor = Color.FromArgb(Intensity, Intensity, Intensity);
-            return resultColor;
+            int newX = Clamp((int)(x+20*Math.Sin(2*Math.PI*x/60)), 0, sourseImage.Width - 1);
+            int newY = y;
+            return sourseImage.GetPixel(newX, newY); ;
         }
     }
 }

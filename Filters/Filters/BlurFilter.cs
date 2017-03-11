@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace Filters
+namespace Filters // Размытие
 {
     class BlurFilter : MatrixFilter
     {

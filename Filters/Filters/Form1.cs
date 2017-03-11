@@ -13,9 +13,11 @@ namespace Filters
     public partial class Form1 : Form
     {
         Bitmap image, resultimage;
+        Stack<Bitmap> st;
         public Form1()
         {
             InitializeComponent();
+            st = new Stack<Bitmap>();
         }
 
         #region Open/Save File
@@ -40,6 +42,7 @@ namespace Filters
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "Image Files | *.png; *.jpg; *.bmp; | All Files (*.*)| *.*";
+            dialog.Title = "Открытие файла";
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 image = new Bitmap(dialog.FileName);
@@ -52,8 +55,10 @@ namespace Filters
         }
         #endregion
 
+        #region ProgressIndicator
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
+            st.Push(resultimage);
             Bitmap newImage = ((Filters)e.Argument).processImage(image, backgroundWorker1);
             if (backgroundWorker1.CancellationPending != true)
                 resultimage = newImage;
@@ -66,52 +71,108 @@ namespace Filters
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (e.Cancelled)
-            {
-                pictureBox2.Image = resultimage;
-                pictureBox2.Refresh();
-            }
+            pictureBox2.Image = resultimage;
+            pictureBox2.Refresh();
             progressBar1.Value = 0;
         }
+        #endregion
 
         private void инверсияToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters filter = new InvertFilter();
-            Bitmap resultImage = filter.processImage(image, backgroundWorker1);
             backgroundWorker1.RunWorkerAsync(filter);
-            backgroundWorker1.CancelAsync();
-            pictureBox2.Image = resultImage;
-            pictureBox2.Refresh();
         }
 
         private void размытиеToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters filter = new BlurFilter();
-            Bitmap resultImage = filter.processImage(image, backgroundWorker1);
             backgroundWorker1.RunWorkerAsync(filter);
-            backgroundWorker1.CancelAsync();
-            pictureBox2.Image = resultImage;
-            pictureBox2.Refresh();
         }
 
         private void фильтрГауссаToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters filter = new GaussianFilter();
-            Bitmap resultImage = filter.processImage(image, backgroundWorker1);
             backgroundWorker1.RunWorkerAsync(filter);
-            backgroundWorker1.CancelAsync();
-            pictureBox2.Image = resultImage;
-            pictureBox2.Refresh();
         }
 
         private void чернобелыйToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters filter = new GrayScaleFilter();
-            Bitmap resultImage = filter.processImage(image, backgroundWorker1);
             backgroundWorker1.RunWorkerAsync(filter);
-            backgroundWorker1.CancelAsync();
-            pictureBox2.Image = resultImage;
-            pictureBox2.Refresh();
+        }
+
+        private void сепияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new SepiaFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void эффектСтеклаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new GlassEffect();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void увеличениеЯркостиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new BrightnessFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void эффектСтеклаToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            Filters filter = new GlassEffect();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void эффектВолныToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new WavesFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void эфектСтеклаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new GlassEffect();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void переносToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form3 F3 = new Form3();
+            F3.ShowDialog();
+            Filters filter = new Shift(F3.x0, F3.y0);
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void поворотToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form2 F2 = new Form2();
+            F2.ShowDialog();
+            Filters filter = new Rotation(F2.x0, F2.y0, F2.alfa);
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void бинарныйФильтрToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new BinaryFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void отменитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (st.Any())
+            {
+                resultimage = st.Pop();
+                pictureBox2.Image = resultimage;
+                pictureBox2.Refresh();
+            }
+        }
+
+        private void резкостьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new HarshnessFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
         }
 
         private void button1_Click(object sender, EventArgs e)

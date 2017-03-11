@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Filters
 {
-    class GaussianFilter : MatrixFilter
+    class GaussianFilter : MatrixFilter // Фильтр Гаусса
     {
         public void createGaussianKernel(int radius, float sigma)
         {
@@ -17,7 +17,7 @@ namespace Filters
             // коэффициент нормировки ядра
             float norm = 0;
             // расчитывает ядро линейного фильтра
-            for(int i = -radius;i<=radius;i++)
+            for (int i = -radius; i <= radius; i++)
                 for (int j = -radius; j <= radius; j++)
                 {
                     kernel[i + radius, j + radius] = (float)(Math.Exp(-(i * i + j * j) / (sigma * sigma)));

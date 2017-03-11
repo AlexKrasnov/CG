@@ -11,7 +11,7 @@ namespace Filters
     abstract class Filters
     {
         protected abstract Color calculateNewPixelColor(Bitmap SourseImage, int x, int y);
-        public Bitmap processImage(Bitmap sourseImage, BackgroundWorker worker)
+        public virtual Bitmap processImage(Bitmap sourseImage, BackgroundWorker worker)
         {
             Bitmap resultImage = new Bitmap(sourseImage.Width, sourseImage.Height);
             for (int i = 0; i < sourseImage.Width; i++)

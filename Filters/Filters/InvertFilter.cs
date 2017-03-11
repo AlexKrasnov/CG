@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Filters
 {
-    class InvertFilter : Filters
+    class InvertFilter : Filters // Инверсия (негатив)
     {
         protected override Color calculateNewPixelColor(Bitmap sourseImage, int x, int y)
         {
