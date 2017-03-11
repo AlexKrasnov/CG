@@ -94,6 +94,16 @@ namespace Filters
             pictureBox2.Refresh();
         }
 
+        private void фильтрГауссаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new GaussianFilter();
+            Bitmap resultImage = filter.processImage(image, backgroundWorker1);
+            backgroundWorker1.RunWorkerAsync(filter);
+            backgroundWorker1.CancelAsync();
+            pictureBox2.Image = resultImage;
+            pictureBox2.Refresh();
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             backgroundWorker1.CancelAsync();
