@@ -46,9 +46,9 @@ namespace Filters
                 resultimage = image;
             }
             pictureBox1.Image = image;
-            pictureBox2.Image = image;
+            //pictureBox2.Image = image;
             pictureBox1.Refresh();
-            pictureBox2.Refresh();
+            //pictureBox2.Refresh();
         }
         #endregion
 
@@ -77,6 +77,16 @@ namespace Filters
         private void инверсияToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters filter = new InvertFilter();
+            Bitmap resultImage = filter.processImage(image, backgroundWorker1);
+            backgroundWorker1.RunWorkerAsync(filter);
+            backgroundWorker1.CancelAsync();
+            pictureBox2.Image = resultImage;
+            pictureBox2.Refresh();
+        }
+
+        private void размытиеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new BlurFilter();
             Bitmap resultImage = filter.processImage(image, backgroundWorker1);
             backgroundWorker1.RunWorkerAsync(filter);
             backgroundWorker1.CancelAsync();
