@@ -302,12 +302,14 @@
             this.открытиеToolStripMenuItem.Name = "открытиеToolStripMenuItem";
             this.открытиеToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.открытиеToolStripMenuItem.Text = "Открытие";
+            this.открытиеToolStripMenuItem.Click += new System.EventHandler(this.открытиеToolStripMenuItem_Click);
             // 
             // закрытиеToolStripMenuItem
             // 
             this.закрытиеToolStripMenuItem.Name = "закрытиеToolStripMenuItem";
             this.закрытиеToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.закрытиеToolStripMenuItem.Text = "Закрытие";
+            this.закрытиеToolStripMenuItem.Click += new System.EventHandler(this.закрытиеToolStripMenuItem_Click);
             // 
             // отменитьToolStripMenuItem
             // 

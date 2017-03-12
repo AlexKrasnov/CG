@@ -211,6 +211,18 @@ namespace Filters
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
+        private void открытиеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new Opening();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void закрытиеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new Closing();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             backgroundWorker1.CancelAsync();

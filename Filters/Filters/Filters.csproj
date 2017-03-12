@@ -51,6 +51,7 @@
     <Compile Include="BinaryFilter.cs" />
     <Compile Include="BlurFilter.cs" />
     <Compile Include="BrightnessFilter.cs" />
+    <Compile Include="Closing.cs" />
     <Compile Include="Dilation.cs" />
     <Compile Include="Erosion.cs" />
     <Compile Include="Filters.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="HarshnessFilter.cs" />
     <Compile Include="InvertFilter.cs" />
     <Compile Include="MatrixFilter.cs" />
+    <Compile Include="Opening.cs" />
     <Compile Include="PrewitteFilter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
