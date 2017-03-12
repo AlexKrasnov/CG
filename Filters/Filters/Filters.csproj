@@ -79,6 +79,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rotation.cs" />
+    <Compile Include="ScharrFilter.cs" />
     <Compile Include="SepiaFilter.cs" />
     <Compile Include="Shift.cs" />
     <Compile Include="SobelFilter.cs" />

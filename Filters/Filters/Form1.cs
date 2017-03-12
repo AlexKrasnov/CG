@@ -175,9 +175,15 @@ namespace Filters
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
-        private void собельToolStripMenuItem_Click(object sender, EventArgs e)
+        private void операторСобеляToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters filter = new SobelFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void операторЩарраToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new ScharrFilter();
             backgroundWorker1.RunWorkerAsync(filter);
         }
 

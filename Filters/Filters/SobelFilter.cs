@@ -8,11 +8,15 @@ using System.ComponentModel;
 
 namespace Filters
 {
-    class SobelFilter : MatrixFilter
+    class SobelFilter : MatrixFilter // Выделение границ (оператор Собеля)
     {
         protected int[,] X = null;
         protected int[,] Y = null;
-        public SobelFilter() { }
+        public SobelFilter()
+        {
+            Y = new int[3, 3] { { 1, 2, 1 }, { 0, 0, 0 }, { -1, -2, -1 } };
+            X = new int[3, 3] { { -1, 0, 1 }, { -2, 0, 2 }, { -1, 0, 1 } };
+        }
         public SobelFilter(int[,] _X, int[,] _Y)
         {
             this.X = _X; this.Y = _Y;
@@ -21,8 +25,6 @@ namespace Filters
         {
             int radiusX = 1;
             int radiusY = 1;
-            Y = new int[3, 3] { { 1, 2, 1 }, { 0, 0, 0 }, { -1, -2, -1 } };
-            X = new int[3, 3] { { -1, 0, 1 }, { -2, 0, 2 }, { -1, 0, 1 } };
             int[] A = new int[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             int[] B = new int[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             float resultRX = 0; float resultGX = 0; float resultBX = 0;

@@ -55,13 +55,14 @@
             this.отменитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.резкостьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.выделениеГраницToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.собельToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.операцииМорфологииToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.расширениеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сужениеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.открытиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.закрытиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.адаптивныйToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.операторСобеляToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.операторЩарраToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -282,17 +283,11 @@
             // выделениеГраницToolStripMenuItem
             // 
             this.выделениеГраницToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.собельToolStripMenuItem});
+            this.операторСобеляToolStripMenuItem,
+            this.операторЩарраToolStripMenuItem});
             this.выделениеГраницToolStripMenuItem.Name = "выделениеГраницToolStripMenuItem";
             this.выделениеГраницToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.выделениеГраницToolStripMenuItem.Text = "Выделение границ";
-            // 
-            // собельToolStripMenuItem
-            // 
-            this.собельToolStripMenuItem.Name = "собельToolStripMenuItem";
-            this.собельToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.собельToolStripMenuItem.Text = "Собель";
-            this.собельToolStripMenuItem.Click += new System.EventHandler(this.собельToolStripMenuItem_Click);
             // 
             // операцииМорфологииToolStripMenuItem
             // 
@@ -334,6 +329,20 @@
             this.адаптивныйToolStripMenuItem.Name = "адаптивныйToolStripMenuItem";
             this.адаптивныйToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.адаптивныйToolStripMenuItem.Text = "Адаптивный";
+            // 
+            // операторСобеляToolStripMenuItem
+            // 
+            this.операторСобеляToolStripMenuItem.Name = "операторСобеляToolStripMenuItem";
+            this.операторСобеляToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.операторСобеляToolStripMenuItem.Text = "Оператор Собеля";
+            this.операторСобеляToolStripMenuItem.Click += new System.EventHandler(this.операторСобеляToolStripMenuItem_Click);
+            // 
+            // операторЩарраToolStripMenuItem
+            // 
+            this.операторЩарраToolStripMenuItem.Name = "операторЩарраToolStripMenuItem";
+            this.операторЩарраToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.операторЩарраToolStripMenuItem.Text = "Оператор Щарра";
+            this.операторЩарраToolStripMenuItem.Click += new System.EventHandler(this.операторЩарраToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -388,13 +397,14 @@
         private System.Windows.Forms.ToolStripMenuItem отменитьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem резкостьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem выделениеГраницToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem собельToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem адаптивныйToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem операцииМорфологииToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem расширениеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem сужениеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem открытиеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem закрытиеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem операторСобеляToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem операторЩарраToolStripMenuItem;
     }
 }
 
