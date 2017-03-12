@@ -81,6 +81,7 @@
     <Compile Include="Rotation.cs" />
     <Compile Include="SepiaFilter.cs" />
     <Compile Include="Shift.cs" />
+    <Compile Include="SobelFilter.cs" />
     <Compile Include="WavesFilter.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
