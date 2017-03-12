@@ -79,6 +79,7 @@
     <Compile Include="PrewitteFilter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RobertsFilter.cs" />
     <Compile Include="Rotation.cs" />
     <Compile Include="ScharrFilter.cs" />
     <Compile Include="SepiaFilter.cs" />

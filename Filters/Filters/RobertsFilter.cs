@@ -4,20 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
-using System.ComponentModel;
 
 namespace Filters
 {
-    class SobelFilter : MatrixFilter // Выделение границ (оператор Собеля)
+    class RobertsFilter : SobelFilter // Выделение границ (оператор Робертса)
     {
-        protected int[,] X = null;
-        protected int[,] Y = null;
-        public SobelFilter()
+        public RobertsFilter()
         {
-            X = new int[3, 3] { { -1, 0, 1 }, { -2, 0, 2 }, { -1, 0, 1 } };
-            Y = new int[3, 3] { { -1, -2, -1 }, { 0, 0, 0 }, { 1, 2, 1 } };
+            X = new int[2, 2] { { 0, 1 }, { -1, 0 } };
+            Y = new int[2, 2] { { 1, 0 }, { 0, -1 } };
         }
-        public SobelFilter(int[,] _X, int[,] _Y)
+        public RobertsFilter(int[,] _X, int[,] _Y)
         {
             this.X = _X; this.Y = _Y;
         }
@@ -27,8 +24,8 @@ namespace Filters
             int radiusY = 1;
             float resultRX = 0; float resultGX = 0; float resultBX = 0;
             float resultRY = 0; float resultGY = 0; float resultBY = 0;
-            for (int l = -radiusY; l <= radiusY; l++)
-                for (int k = -radiusX; k <= radiusX; k++)
+            for (int l = -radiusY; l < radiusY; l++)
+                for (int k = -radiusX; k < radiusX; k++)
                 {
                     int idX = Clamp(x + k, 0, sourseImage.Width - 1);
                     int idY = Clamp(y + l, 0, sourseImage.Height - 1);

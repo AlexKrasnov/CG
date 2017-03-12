@@ -64,6 +64,7 @@
             this.операторСобеляToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.операторЩарраToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.операторПрюиттаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.операторРобертсаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -286,7 +287,8 @@
             this.выделениеГраницToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.операторСобеляToolStripMenuItem,
             this.операторЩарраToolStripMenuItem,
-            this.операторПрюиттаToolStripMenuItem});
+            this.операторПрюиттаToolStripMenuItem,
+            this.операторРобертсаToolStripMenuItem});
             this.выделениеГраницToolStripMenuItem.Name = "выделениеГраницToolStripMenuItem";
             this.выделениеГраницToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.выделениеГраницToolStripMenuItem.Text = "Выделение границ";
@@ -335,23 +337,30 @@
             // операторСобеляToolStripMenuItem
             // 
             this.операторСобеляToolStripMenuItem.Name = "операторСобеляToolStripMenuItem";
-            this.операторСобеляToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.операторСобеляToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.операторСобеляToolStripMenuItem.Text = "Оператор Собеля";
             this.операторСобеляToolStripMenuItem.Click += new System.EventHandler(this.операторСобеляToolStripMenuItem_Click);
             // 
             // операторЩарраToolStripMenuItem
             // 
             this.операторЩарраToolStripMenuItem.Name = "операторЩарраToolStripMenuItem";
-            this.операторЩарраToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.операторЩарраToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.операторЩарраToolStripMenuItem.Text = "Оператор Щарра";
             this.операторЩарраToolStripMenuItem.Click += new System.EventHandler(this.операторЩарраToolStripMenuItem_Click);
             // 
             // операторПрюиттаToolStripMenuItem
             // 
             this.операторПрюиттаToolStripMenuItem.Name = "операторПрюиттаToolStripMenuItem";
-            this.операторПрюиттаToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.операторПрюиттаToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.операторПрюиттаToolStripMenuItem.Text = "Оператор Прюитта";
             this.операторПрюиттаToolStripMenuItem.Click += new System.EventHandler(this.операторПрюиттаToolStripMenuItem_Click);
+            // 
+            // операторРобертсаToolStripMenuItem
+            // 
+            this.операторРобертсаToolStripMenuItem.Name = "операторРобертсаToolStripMenuItem";
+            this.операторРобертсаToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.операторРобертсаToolStripMenuItem.Text = "Оператор Робертса";
+            this.операторРобертсаToolStripMenuItem.Click += new System.EventHandler(this.операторРобертсаToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -415,6 +424,7 @@
         private System.Windows.Forms.ToolStripMenuItem операторСобеляToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem операторЩарраToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem операторПрюиттаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem операторРобертсаToolStripMenuItem;
     }
 }
 

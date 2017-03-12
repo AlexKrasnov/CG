@@ -193,6 +193,12 @@ namespace Filters
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
+        private void операторРобертсаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new RobertsFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             backgroundWorker1.CancelAsync();
