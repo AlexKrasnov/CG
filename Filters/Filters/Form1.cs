@@ -13,11 +13,13 @@ namespace Filters
     public partial class Form1 : Form
     {
         Bitmap image, resultimage;
-        Stack<Bitmap> st;
+        Stack<Bitmap> st1;
+        Stack<Bitmap> st2;
         public Form1()
         {
             InitializeComponent();
-            st = new Stack<Bitmap>();
+            st1 = new Stack<Bitmap>();
+            st2 = new Stack<Bitmap>();
         }
 
         #region Open/Save File
@@ -58,7 +60,7 @@ namespace Filters
         #region ProgressIndicator
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            st.Push(resultimage);
+            st1.Push(resultimage);
             Bitmap newImage = ((Filters)e.Argument).processImage(image, backgroundWorker1);
             if (backgroundWorker1.CancellationPending != true)
                 resultimage = newImage;
@@ -161,9 +163,21 @@ namespace Filters
 
         private void отменитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (st.Any())
+            if (st1.Any())
             {
-                resultimage = st.Pop();
+                st2.Push(resultimage);
+                resultimage = st1.Pop();
+                pictureBox2.Image = resultimage;
+                pictureBox2.Refresh();
+            }
+        }
+
+        private void вернутьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (st2.Any())
+            {
+                st1.Push(resultimage);
+                resultimage = st2.Pop();
                 pictureBox2.Image = resultimage;
                 pictureBox2.Refresh();
             }
@@ -223,6 +237,12 @@ namespace Filters
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
+        private void градиентToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new Grad();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
         private void коррекцияСОпорнымЦветомToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form1 F1 = new Form1();
@@ -238,6 +258,29 @@ namespace Filters
         {
             Filters filter = new IdealFilter();
             backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void серыйМирToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new GrayWorldFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void медианныйФильтрToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new MedianFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void эффектКарандашаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new ColorPen();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void адаптивныйToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void button1_Click(object sender, EventArgs e)

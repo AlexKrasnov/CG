@@ -8,15 +8,21 @@ using System.ComponentModel;
 
 namespace Filters
 {
-    class IdealFilter : Filters // "Идеальный отражатель"
+    class GrayWorldFilter : Filters // "Серый мир"
     {
+        protected int Avg;
+        protected int R, G, B;
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
-            return sourceImage.GetPixel(x, y);
+            Color sourceColor = sourceImage.GetPixel(x, y);
+            Color resultColor = Color.FromArgb(Clamp(sourceColor.R * Avg / R, 0, 255), Clamp(sourceColor.G * Avg / G, 0, 255), Clamp(sourceColor.B * Avg / B, 0, 255));
+            return resultColor;
         }
+
         public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
         {
-            double Rmax = 0, Gmax = 0, Bmax = 0;
+            Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
+            R = 0; G = 0; B = 0; Avg = 0;
             for (int i = 0; i < sourceImage.Width; i++)
             {
                 worker.ReportProgress((int)((float)i / sourceImage.Width * 100));
@@ -24,26 +30,25 @@ namespace Filters
                     return null;
                 for (int j = 0; j < sourceImage.Height; j++)
                 {
-                    if (sourceImage.GetPixel(i, j).R > Rmax) Rmax = sourceImage.GetPixel(i, j).R;
-                    if (sourceImage.GetPixel(i, j).G > Gmax) Gmax = sourceImage.GetPixel(i, j).G;
-                    if (sourceImage.GetPixel(i, j).B > Bmax) Bmax = sourceImage.GetPixel(i, j).B;
+                    Color sourceColor = sourceImage.GetPixel(i, j);
+                    R += sourceColor.R;
+                    G += sourceColor.G;
+                    B += sourceColor.B;
                 }
             }
-            Bitmap result = new Bitmap(sourceImage.Width, sourceImage.Height);
+            R = R / (sourceImage.Width * sourceImage.Height);
+            G = G / (sourceImage.Width * sourceImage.Height);
+            B = B / (sourceImage.Width * sourceImage.Height);
+            Avg = (R + G + B) / 3;
             for (int i = 0; i < sourceImage.Width; i++)
             {
                 worker.ReportProgress((int)((float)i / sourceImage.Width * 100));
                 if (worker.CancellationPending)
                     return null;
                 for (int j = 0; j < sourceImage.Height; j++)
-                {
-                    int newR = Clamp((int)(calculateNewPixelColor(sourceImage, i, j).R * 255 / Rmax), 0, 255);
-                    int newG = Clamp((int)(calculateNewPixelColor(sourceImage, i, j).G * 255 / Gmax), 0, 255);
-                    int newB = Clamp((int)(calculateNewPixelColor(sourceImage, i, j).B * 255 / Bmax), 0, 255);
-                    result.SetPixel(i, j, Color.FromArgb(newR, newG, newB));
-                }
+                    resultImage.SetPixel(i, j, calculateNewPixelColor(sourceImage, i, j));
             }
-            return result;
+            return resultImage;
         }
     }
 }

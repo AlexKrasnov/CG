@@ -15,36 +15,36 @@ namespace Filters
         {
             c = _c;
         }
-        protected override Color calculateNewPixelColor(Bitmap SourseImage, int x, int y)
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
-            return SourseImage.GetPixel(x, y);
+            return sourceImage.GetPixel(x, y);
         }
-        public override Bitmap processImage(Bitmap sourseImage, BackgroundWorker worker)
+        public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
         {
             double Rsrc = 0, Gsrc = 0, Bsrc = 0, Rdst = c.R, Gdst = c.G, Bdst = c.B;
-            for (int i = 0; i < sourseImage.Width; i++)
+            for (int i = 0; i < sourceImage.Width; i++)
             {
-                worker.ReportProgress((int)((float)i / sourseImage.Width * 100));
+                worker.ReportProgress((int)((float)i / sourceImage.Width * 100));
                 if (worker.CancellationPending)
                     return null;
-                for (int j = 0; j < sourseImage.Height; j++)
+                for (int j = 0; j < sourceImage.Height; j++)
                 {
-                    if (sourseImage.GetPixel(i, j).R > Rsrc) Rsrc = sourseImage.GetPixel(i, j).R;
-                    if (sourseImage.GetPixel(i, j).G > Gsrc) Gsrc = sourseImage.GetPixel(i, j).G;
-                    if (sourseImage.GetPixel(i, j).B > Bsrc) Bsrc = sourseImage.GetPixel(i, j).B;
+                    if (sourceImage.GetPixel(i, j).R > Rsrc) Rsrc = sourceImage.GetPixel(i, j).R;
+                    if (sourceImage.GetPixel(i, j).G > Gsrc) Gsrc = sourceImage.GetPixel(i, j).G;
+                    if (sourceImage.GetPixel(i, j).B > Bsrc) Bsrc = sourceImage.GetPixel(i, j).B;
                 }
             }
-            Bitmap result = new Bitmap(sourseImage.Width, sourseImage.Height);
-            for (int i = 0; i < sourseImage.Width; i++)
+            Bitmap result = new Bitmap(sourceImage.Width, sourceImage.Height);
+            for (int i = 0; i < sourceImage.Width; i++)
             {
-                worker.ReportProgress((int)((float)i / sourseImage.Width * 100));
+                worker.ReportProgress((int)((float)i / sourceImage.Width * 100));
                 if (worker.CancellationPending)
                     return null;
-                for (int j = 0; j < sourseImage.Height; j++)
+                for (int j = 0; j < sourceImage.Height; j++)
                 {
-                    int newR = Clamp((int)(calculateNewPixelColor(sourseImage, i, j).R * Rdst / Rsrc), 0, 255);
-                    int newG = Clamp((int)(calculateNewPixelColor(sourseImage, i, j).G * Gdst / Gsrc), 0, 255);
-                    int newB = Clamp((int)(calculateNewPixelColor(sourseImage, i, j).B * Bdst / Bsrc), 0, 255);
+                    int newR = Clamp((int)(calculateNewPixelColor(sourceImage, i, j).R * Rdst / Rsrc), 0, 255);
+                    int newG = Clamp((int)(calculateNewPixelColor(sourceImage, i, j).G * Gdst / Gsrc), 0, 255);
+                    int newB = Clamp((int)(calculateNewPixelColor(sourceImage, i, j).B * Bdst / Bsrc), 0, 255);
                     result.SetPixel(i, j, Color.FromArgb(newR, newG, newB));
                 }
             }
