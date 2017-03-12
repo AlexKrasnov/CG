@@ -14,8 +14,8 @@ namespace Filters
         protected int[,] Y = null;
         public SobelFilter()
         {
-            Y = new int[3, 3] { { 1, 2, 1 }, { 0, 0, 0 }, { -1, -2, -1 } };
             X = new int[3, 3] { { -1, 0, 1 }, { -2, 0, 2 }, { -1, 0, 1 } };
+            Y = new int[3, 3] { { -1, -2, -1 }, { 0, 0, 0 }, { 1, 2, 1 } };
         }
         public SobelFilter(int[,] _X, int[,] _Y)
         {

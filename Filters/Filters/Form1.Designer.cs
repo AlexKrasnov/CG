@@ -63,6 +63,7 @@
             this.адаптивныйToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.операторСобеляToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.операторЩарраToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.операторПрюиттаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -284,7 +285,8 @@
             // 
             this.выделениеГраницToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.операторСобеляToolStripMenuItem,
-            this.операторЩарраToolStripMenuItem});
+            this.операторЩарраToolStripMenuItem,
+            this.операторПрюиттаToolStripMenuItem});
             this.выделениеГраницToolStripMenuItem.Name = "выделениеГраницToolStripMenuItem";
             this.выделениеГраницToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.выделениеГраницToolStripMenuItem.Text = "Выделение границ";
@@ -333,16 +335,23 @@
             // операторСобеляToolStripMenuItem
             // 
             this.операторСобеляToolStripMenuItem.Name = "операторСобеляToolStripMenuItem";
-            this.операторСобеляToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.операторСобеляToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.операторСобеляToolStripMenuItem.Text = "Оператор Собеля";
             this.операторСобеляToolStripMenuItem.Click += new System.EventHandler(this.операторСобеляToolStripMenuItem_Click);
             // 
             // операторЩарраToolStripMenuItem
             // 
             this.операторЩарраToolStripMenuItem.Name = "операторЩарраToolStripMenuItem";
-            this.операторЩарраToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.операторЩарраToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.операторЩарраToolStripMenuItem.Text = "Оператор Щарра";
             this.операторЩарраToolStripMenuItem.Click += new System.EventHandler(this.операторЩарраToolStripMenuItem_Click);
+            // 
+            // операторПрюиттаToolStripMenuItem
+            // 
+            this.операторПрюиттаToolStripMenuItem.Name = "операторПрюиттаToolStripMenuItem";
+            this.операторПрюиттаToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.операторПрюиттаToolStripMenuItem.Text = "Оператор Прюитта";
+            this.операторПрюиттаToolStripMenuItem.Click += new System.EventHandler(this.операторПрюиттаToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -405,6 +414,7 @@
         private System.Windows.Forms.ToolStripMenuItem закрытиеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem операторСобеляToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem операторЩарраToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem операторПрюиттаToolStripMenuItem;
     }
 }
 

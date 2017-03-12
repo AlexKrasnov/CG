@@ -187,6 +187,12 @@ namespace Filters
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
+        private void операторПрюиттаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new PrewitteFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             backgroundWorker1.CancelAsync();
