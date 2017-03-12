@@ -36,13 +36,13 @@ namespace Filters
                 {
                     int minR = 255; int minG = 255; int minB = 255;
                     for (int i1 = -MW / 2; i1 <= MW / 2; i1++)
-                        for (int j1 = -MW / 2; j1 <= MW / 2; j1++)
+                        for (int j1 = -MH / 2; j1 <= MH / 2; j1++)
                         {
-                            if ((mask[i1 + 2, j1 + 2]) && (sourseImage.GetPixel(i + i1, j + j1).R < minR))
+                            if ((mask[i1 + MW / 2, j1 + MH / 2]) && (sourseImage.GetPixel(i + i1, j + j1).R < minR))
                                 minR = sourseImage.GetPixel(i + i1, j + j1).R;
-                            if ((mask[i1 + 2, j1 + 2]) && (sourseImage.GetPixel(i + i1, j + j1).G < minG))
+                            if ((mask[i1 + MW / 2, j1 + MH / 2]) && (sourseImage.GetPixel(i + i1, j + j1).G < minG))
                                 minG = sourseImage.GetPixel(i + i1, j + j1).G;
-                            if ((mask[i1 + 2, j1 + 2]) && (sourseImage.GetPixel(i + i1, j + j1).B < minB))
+                            if ((mask[i1 + MW / 2, j1 + MH / 2]) && (sourseImage.GetPixel(i + i1, j + j1).B < minB))
                                 minB = sourseImage.GetPixel(i + i1, j + j1).B;
                         }
                     resultImage.SetPixel(i, j, Color.FromArgb(minR, minG, minB));

@@ -75,9 +75,11 @@
     </Compile>
     <Compile Include="GaussianFilter.cs" />
     <Compile Include="GlassEffect.cs" />
+    <Compile Include="Grad.cs" />
     <Compile Include="GrayScaleFilter.cs" />
     <Compile Include="HarshnessFilter.cs" />
     <Compile Include="InvertFilter.cs" />
+    <Compile Include="MainColorFilter.cs" />
     <Compile Include="MatrixFilter.cs" />
     <Compile Include="Opening.cs" />
     <Compile Include="PrewitteFilter.cs" />

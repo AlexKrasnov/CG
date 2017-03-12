@@ -223,6 +223,17 @@ namespace Filters
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
+        private void коррекцияСОпорнымЦветомToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form1 F1 = new Form1();
+            Color cc;
+            if (F1.colorDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                cc = F1.colorDialog1.Color;
+            else return;
+            Filters filter = new MainColorFilter(cc);
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             backgroundWorker1.CancelAsync();
