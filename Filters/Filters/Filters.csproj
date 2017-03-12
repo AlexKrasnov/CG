@@ -78,6 +78,7 @@
     <Compile Include="Grad.cs" />
     <Compile Include="GrayScaleFilter.cs" />
     <Compile Include="HarshnessFilter.cs" />
+    <Compile Include="IdealFilter.cs" />
     <Compile Include="InvertFilter.cs" />
     <Compile Include="MainColorFilter.cs" />
     <Compile Include="MatrixFilter.cs" />
