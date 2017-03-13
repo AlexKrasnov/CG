@@ -295,6 +295,12 @@ namespace Filters
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
+        private void blackHatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new BlackHat();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             backgroundWorker1.CancelAsync();

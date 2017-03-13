@@ -75,6 +75,7 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.topHatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.blackHatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -305,7 +306,8 @@
             this.открытиеToolStripMenuItem,
             this.закрытиеToolStripMenuItem,
             this.градиентToolStripMenuItem,
-            this.topHatToolStripMenuItem});
+            this.topHatToolStripMenuItem,
+            this.blackHatToolStripMenuItem});
             this.операцииМорфологииToolStripMenuItem.Name = "операцииМорфологииToolStripMenuItem";
             this.операцииМорфологииToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.операцииМорфологииToolStripMenuItem.Text = "Операции морфологии";
@@ -449,6 +451,13 @@
             this.topHatToolStripMenuItem.Text = "Top Hat";
             this.topHatToolStripMenuItem.Click += new System.EventHandler(this.topHatToolStripMenuItem_Click);
             // 
+            // blackHatToolStripMenuItem
+            // 
+            this.blackHatToolStripMenuItem.Name = "blackHatToolStripMenuItem";
+            this.blackHatToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.blackHatToolStripMenuItem.Text = "Black Hat";
+            this.blackHatToolStripMenuItem.Click += new System.EventHandler(this.blackHatToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -522,6 +531,7 @@
         private System.Windows.Forms.ToolStripMenuItem градиентToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem линейнаяКоррекцияToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem topHatToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem blackHatToolStripMenuItem;
     }
 }
 
