@@ -73,6 +73,7 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.вернутьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.градиентToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.линейнаяКоррекцияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -123,7 +124,8 @@
             this.коррекцияСОпорнымЦветомToolStripMenuItem,
             this.идеальныйОтражательToolStripMenuItem,
             this.серыйМирToolStripMenuItem,
-            this.медианныйФильтрToolStripMenuItem});
+            this.медианныйФильтрToolStripMenuItem,
+            this.линейнаяКоррекцияToolStripMenuItem});
             this.фильтрыToolStripMenuItem.Name = "фильтрыToolStripMenuItem";
             this.фильтрыToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
             this.фильтрыToolStripMenuItem.Text = "Фильтры";
@@ -431,6 +433,13 @@
             this.градиентToolStripMenuItem.Text = "Градиент";
             this.градиентToolStripMenuItem.Click += new System.EventHandler(this.градиентToolStripMenuItem_Click);
             // 
+            // линейнаяКоррекцияToolStripMenuItem
+            // 
+            this.линейнаяКоррекцияToolStripMenuItem.Name = "линейнаяКоррекцияToolStripMenuItem";
+            this.линейнаяКоррекцияToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
+            this.линейнаяКоррекцияToolStripMenuItem.Text = "Линейная коррекция";
+            this.линейнаяКоррекцияToolStripMenuItem.Click += new System.EventHandler(this.линейнаяКоррекцияToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -502,6 +511,7 @@
         private System.Windows.Forms.ToolStripMenuItem эффектКарандашаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem вернутьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem градиентToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem линейнаяКоррекцияToolStripMenuItem;
     }
 }
 

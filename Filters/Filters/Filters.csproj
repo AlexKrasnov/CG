@@ -69,6 +69,7 @@
     </Compile>
     <Compile Include="GrayWorldFilter.cs" />
     <Compile Include="IdealFilter.cs" />
+    <Compile Include="LinearCorrection.cs" />
     <Compile Include="MainColorFilter.cs" />
     <Compile Include="MatrixFilters.cs" />
     <Compile Include="MedianFilter.cs" />

@@ -31,7 +31,7 @@ namespace Filters
             if (pictureBox2.Image != null)
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
-                    image.Save(dialog.FileName);
+                    resultimage.Save(dialog.FileName);
             }
             else
             {
@@ -281,6 +281,12 @@ namespace Filters
         private void адаптивныйToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void линейнаяКоррекцияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new LinearCorrection();
+            backgroundWorker1.RunWorkerAsync(filter);
         }
 
         private void button1_Click(object sender, EventArgs e)
