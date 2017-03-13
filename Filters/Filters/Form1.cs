@@ -289,6 +289,12 @@ namespace Filters
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
+        private void topHatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new TopHat();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             backgroundWorker1.CancelAsync();

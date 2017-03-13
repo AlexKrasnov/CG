@@ -222,4 +222,32 @@ namespace Filters
             return result;
         }
     }
+
+    class TopHat : Filters // TopHat (цилиндр)
+    {
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            return sourceImage.GetPixel(x, y);
+        }
+        public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
+        {
+            Bitmap result = new Bitmap(sourceImage.Width, sourceImage.Height);
+            Filters filter1 = new Closing();
+            Bitmap result1 = filter1.processImage(sourceImage, worker);
+            for (int i = 0; i < sourceImage.Width; i++)
+            {
+                worker.ReportProgress((int)((float)i / sourceImage.Width * 100));
+                if (worker.CancellationPending)
+                    return null;
+                for (int j = 0; j < sourceImage.Height; j++)
+                {
+                    int newR = Clamp(sourceImage.GetPixel(i, j).R - result1.GetPixel(i, j).R, 0, 255);
+                    int newG = Clamp(sourceImage.GetPixel(i, j).G - result1.GetPixel(i, j).G, 0, 255);
+                    int newB = Clamp(sourceImage.GetPixel(i, j).B - result1.GetPixel(i, j).B, 0, 255);
+                    result.SetPixel(i, j, Color.FromArgb(newR, newG, newB));
+                }
+            }
+            return result;
+        }
+    }
 }
