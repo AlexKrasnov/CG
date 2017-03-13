@@ -21,7 +21,6 @@ namespace Filters
         public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
         {
             Bitmap result = new Bitmap(sourceImage);
-            //Задаются значения цвета левого верхнего пиксела и правого нижнего (Xmax, Xmin)
             int XminR = 0, XmaxR = 0, XmaxG = 0, XminG = 0, XmaxB = 0, XminB = 0;
             for (int i = 0; i < sourceImage.Width; i++)
             {

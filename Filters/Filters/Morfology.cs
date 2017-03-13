@@ -201,22 +201,24 @@ namespace Filters
         }
         public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
         {
-            Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
+            Bitmap result = new Bitmap(sourceImage.Width, sourceImage.Height);
             Filters filter1 = new Dilation();
             Bitmap result1 = filter1.processImage(sourceImage, worker);
             Filters filter2 = new Erosion();
             Bitmap result2 = filter2.processImage(sourceImage, worker);
-            bool[,] kernel = new bool[result2.Width / 100, result2.Height / 100];
-            for (int i = 0; i < result2.Width / 100; i++)
-                for (int j = 0; j < result2.Height / 100; j++)
+            for (int i = 0; i < sourceImage.Width; i++)
                 {
-                    if (result2.GetPixel(i,j).R == 255 && result2.GetPixel(i, j).G == 255 && result2.GetPixel(i, j).B == 255)
-                        kernel[i, j] = true;
-                    else
-                        kernel[i, j] = false;
+                    worker.ReportProgress((int)((float)i / sourceImage.Width * 100));
+                    if (worker.CancellationPending)
+                        return null;
+                    for (int j = 0; j < sourceImage.Height; j++)
+                    {
+                        int newR = Clamp(result1.GetPixel(i, j).R - result2.GetPixel(i, j).R, 0, 255);
+                        int newG = Clamp(result1.GetPixel(i, j).G - result2.GetPixel(i, j).G, 0, 255);
+                        int newB = Clamp(result1.GetPixel(i, j).B - result2.GetPixel(i, j).B, 0, 255);
+                        result.SetPixel(i, j, Color.FromArgb(newR, newG, newB));
+                    }
                 }
-            Filters filter3 = new Erosion(kernel);
-            Bitmap result = filter3.processImage(result1, worker);
             return result;
         }
     }
