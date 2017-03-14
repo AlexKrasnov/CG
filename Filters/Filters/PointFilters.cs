@@ -7,21 +7,12 @@ using System.Drawing;
 
 namespace Filters
 {
-    class PointFilters : Filters // Точечные фильтры
-    {
-        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
-        {
-            return sourceImage.GetPixel(x, y);
-        }
-    }
-
     class InvertFilter : Filters // Инверсия (негатив)
     {
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
             Color sourseColor = sourceImage.GetPixel(x, y);
-            Color resultColor = Color.FromArgb(255 - sourseColor.R, 255 - sourseColor.G, 255 - sourseColor.B);
-            return resultColor;
+            return Color.FromArgb(255 - sourseColor.R, 255 - sourseColor.G, 255 - sourseColor.B);
         }
     }
 
@@ -31,8 +22,7 @@ namespace Filters
         {
             Color sourceColor = sourceImage.GetPixel(x, y);
             int Intensity = (int)(0.213 * sourceColor.R + 0.715 * sourceColor.G + 0.072 * sourceColor.B);
-            Color resultColor = Color.FromArgb(Intensity, Intensity, Intensity);
-            return resultColor;
+            return Color.FromArgb(Intensity, Intensity, Intensity);
         }
     }
 
@@ -46,8 +36,7 @@ namespace Filters
             int R = Clamp(Intensity + 2 * koef, 0, 255);
             int G = Clamp(Intensity + koef / 2, 0, 255);
             int B = Clamp(Intensity - koef, 0, 255);
-            Color resultColor = Color.FromArgb(R, G, B);
-            return resultColor;
+            return Color.FromArgb(R, G, B);
         }
     }
 
@@ -119,17 +108,15 @@ namespace Filters
         }
     }
 
-        class BinaryFilter : Filters // В бинарное изображение
+    class BinaryFilter : Filters // В бинарное изображение
     {
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
             Color s = sourceImage.GetPixel(x, y);
-            Color resultColor;
             if (s.R < 127 && s.G < 127 && s.B < 127)
-                resultColor = Color.FromArgb(0, 0, 0);
+                return Color.FromArgb(0, 0, 0);
             else
-                resultColor = Color.FromArgb(255, 255, 255);
-            return resultColor;
+                return Color.FromArgb(255, 255, 255);
         }
     }
 }
