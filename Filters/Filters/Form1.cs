@@ -12,11 +12,13 @@ namespace Filters
 {
     public partial class Form1 : Form
     {
+        public int[,] StructElem;
         Bitmap image, resultimage;
         Stack<Bitmap> st1;
         Stack<Bitmap> st2;
         public Form1()
         {
+            StructElem = new int[3, 3] { { 0, 1, 0 }, { 1, 1, 1 }, { 0, 1, 0 } };
             InitializeComponent();
             st1 = new Stack<Bitmap>();
             st2 = new Stack<Bitmap>();
@@ -215,31 +217,31 @@ namespace Filters
 
         private void расширениеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Filters filter = new Dilation();
+            Filters filter = new Dilation(StructElem);
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
         private void сужениеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Filters filter = new Erosion();
+            Filters filter = new Erosion(StructElem);
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
         private void открытиеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Filters filter = new Opening();
+            Filters filter = new Opening(StructElem);
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
         private void закрытиеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Filters filter = new Closing();
+            Filters filter = new Closing(StructElem);
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
         private void градиентToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Filters filter = new Grad();
+            Filters filter = new Grad(StructElem);
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
@@ -278,11 +280,6 @@ namespace Filters
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
-        private void адаптивныйToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void линейнаяКоррекцияToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters filter = new LinearCorrection();
@@ -291,13 +288,13 @@ namespace Filters
 
         private void topHatToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Filters filter = new TopHat();
+            Filters filter = new TopHat(StructElem);
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
         private void blackHatToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Filters filter = new BlackHat();
+            Filters filter = new BlackHat(StructElem);
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
@@ -305,6 +302,15 @@ namespace Filters
         {
             Filters filter = new ColorCorrection();
             backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void задатьСтруктурныйЭлементToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form4 F4 = new Form4();
+            F4.ShowDialog();
+            for (int i = 0; i < 3; i++)
+                for (int j = 0; j < 3; j++)
+                    StructElem[i, j] = F4.StructElem[i,j];
         }
 
         private void button1_Click(object sender, EventArgs e)

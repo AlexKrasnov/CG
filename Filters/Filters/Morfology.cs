@@ -96,6 +96,10 @@ namespace Filters
 
     class Opening : Morfology // Морфологическое открытие
     {
+        public Opening(int[,] mask)
+        {
+            this.mask = mask;
+        }
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
             return sourceImage.GetPixel(x, y);
@@ -103,9 +107,9 @@ namespace Filters
         public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
         {
             Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
-            Filters filter1 = new Erosion();
+            Filters filter1 = new Erosion(mask);
             Bitmap result = filter1.processImage(sourceImage, worker);
-            Filters filter2 = new Dilation();
+            Filters filter2 = new Dilation(mask);
             result = filter2.processImage(result, worker);
             return result;
         }
@@ -113,6 +117,10 @@ namespace Filters
 
     class Closing : Morfology // Морфологическое закрытие
     {
+        public Closing(int[,] mask)
+        {
+            this.mask = mask;
+        }
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
             return sourceImage.GetPixel(x, y);
@@ -120,9 +128,9 @@ namespace Filters
         public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
         {
             Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
-            Filters filter1 = new Dilation();
+            Filters filter1 = new Dilation(mask);
             Bitmap result = filter1.processImage(sourceImage, worker);
-            Filters filter2 = new Erosion();
+            Filters filter2 = new Erosion(mask);
             result = filter2.processImage(result, worker);
             return result;
         }
@@ -130,6 +138,10 @@ namespace Filters
 
     class Grad : Morfology // Градиент
     {
+        public Grad(int[,] mask)
+        {
+            this.mask = mask;
+        }
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
             return sourceImage.GetPixel(x, y);
@@ -137,9 +149,9 @@ namespace Filters
         public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
         {
             Bitmap result = new Bitmap(sourceImage.Width, sourceImage.Height);
-            Filters filter1 = new Dilation();
+            Filters filter1 = new Dilation(mask);
             Bitmap result1 = filter1.processImage(sourceImage, worker);
-            Filters filter2 = new Erosion();
+            Filters filter2 = new Erosion(mask);
             Bitmap result2 = filter2.processImage(sourceImage, worker);
             for (int i = 0; i < sourceImage.Width; i++)
                 {
@@ -160,6 +172,10 @@ namespace Filters
 
     class TopHat : Morfology // TopHat (цилиндр)
     {
+        public TopHat(int[,] mask)
+        {
+            this.mask = mask;
+        }
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
             return sourceImage.GetPixel(x, y);
@@ -167,7 +183,7 @@ namespace Filters
         public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
         {
             Bitmap result = new Bitmap(sourceImage.Width, sourceImage.Height);
-            Filters filter1 = new Erosion();
+            Filters filter1 = new Erosion(mask);
             Bitmap result1 = filter1.processImage(sourceImage, worker);
             for (int i = 0; i < sourceImage.Width; i++)
             {
@@ -188,6 +204,10 @@ namespace Filters
 
     class BlackHat : Morfology // BlackHat (эффект черной шляпы)
     {
+        public BlackHat(int[,] mask)
+        {
+            this.mask = mask;
+        }
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
             return sourceImage.GetPixel(x, y);
@@ -195,7 +215,7 @@ namespace Filters
         public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
         {
             Bitmap result = new Bitmap(sourceImage.Width, sourceImage.Height);
-            Filters filter1 = new Dilation();
+            Filters filter1 = new Dilation(mask);
             Bitmap result1 = filter1.processImage(sourceImage, worker);
             for (int i = 0; i < sourceImage.Width; i++)
             {
