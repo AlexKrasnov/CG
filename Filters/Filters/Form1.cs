@@ -285,8 +285,8 @@ namespace Filters
 
         private void линейнаяКоррекцияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Filters filter = new LinearCorrection();
-            //backgroundWorker1.RunWorkerAsync(filter);
+            Filters filter = new LinearCorrection();
+            backgroundWorker1.RunWorkerAsync(filter);
         }
 
         private void topHatToolStripMenuItem_Click(object sender, EventArgs e)

@@ -53,7 +53,6 @@
             this.операторЩарраToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.операторПрюиттаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.операторРобертсаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.адаптивныйToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.эффектКарандашаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.операцииМорфологииToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.расширениеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -220,7 +219,6 @@
             this.фильтрГауссаToolStripMenuItem,
             this.резкостьToolStripMenuItem,
             this.выделениеГраницToolStripMenuItem,
-            this.адаптивныйToolStripMenuItem,
             this.эффектКарандашаToolStripMenuItem});
             this.матричныеToolStripMenuItem.Name = "матричныеToolStripMenuItem";
             this.матричныеToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
@@ -285,13 +283,6 @@
             this.операторРобертсаToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.операторРобертсаToolStripMenuItem.Text = "Оператор Робертса";
             this.операторРобертсаToolStripMenuItem.Click += new System.EventHandler(this.операторРобертсаToolStripMenuItem_Click);
-            // 
-            // адаптивныйToolStripMenuItem
-            // 
-            this.адаптивныйToolStripMenuItem.Name = "адаптивныйToolStripMenuItem";
-            this.адаптивныйToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.адаптивныйToolStripMenuItem.Text = "Адаптивный";
-            this.адаптивныйToolStripMenuItem.Click += new System.EventHandler(this.адаптивныйToolStripMenuItem_Click);
             // 
             // эффектКарандашаToolStripMenuItem
             // 
@@ -520,7 +511,6 @@
         private System.Windows.Forms.ToolStripMenuItem отменитьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem резкостьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem выделениеГраницToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem адаптивныйToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem операцииМорфологииToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem расширениеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem сужениеToolStripMenuItem;

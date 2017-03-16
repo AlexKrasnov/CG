@@ -11,16 +11,19 @@ namespace Filters
     class Morfology : Filters // Операции морфологии 
     {
         protected bool isDilation;
-        protected bool[,] kernel = null;
-        protected Morfology() { }
-        public Morfology(bool[,] kernel)
+        protected int [,] mask = null;
+        protected Morfology()
         {
-            this.kernel = kernel;
+            mask = new int[,] { { 0, 1, 0 }, { 1, 1, 1 }, { 0, 1, 0 } };
+        }
+        public Morfology(int[,] mask)
+        {
+            this.mask = mask;
         }
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
-            int radiusX = kernel.GetLength(0) / 2;
-            int radiusY = kernel.GetLength(1) / 2;
+            int radiusX = mask.GetLength(0) / 2;
+            int radiusY = mask.GetLength(1) / 2;
             int minR = 255; int minG = 255; int minB = 255;
             int maxR = 0; int maxG = 0; int maxB = 0;
             for (int i = -radiusX; i <= radiusX; i++)
@@ -28,20 +31,20 @@ namespace Filters
                 {
                     if (isDilation)
                     {
-                        if ((kernel[i + radiusX, j + radiusY]) && (sourceImage.GetPixel(x + i, y + j).R > maxR))
+                        if ((mask[i + radiusX, j + radiusY] != 0) && (sourceImage.GetPixel(x + i, y + j).R > maxR))
                             maxR = sourceImage.GetPixel(x + i, y + j).R;
-                        if ((kernel[i + radiusX, j + radiusY]) && (sourceImage.GetPixel(x + i, y + j).G > maxG))
+                        if ((mask[i + radiusX, j + radiusY] != 0) && (sourceImage.GetPixel(x + i, y + j).G > maxG))
                             maxG = sourceImage.GetPixel(x + i, y + j).G;
-                        if ((kernel[i + radiusX, j + radiusY]) && (sourceImage.GetPixel(x + i, y + j).B > maxB))
+                        if ((mask[i + radiusX, j + radiusY] != 0) && (sourceImage.GetPixel(x + i, y + j).B > maxB))
                             maxB = sourceImage.GetPixel(x + i, y + j).B;
                     }
                     else
                     {
-                        if ((kernel[i + radiusX, j + radiusY]) && (sourceImage.GetPixel(x + i, y + j).R < minR))
+                        if ((mask[i + radiusX, j + radiusY] != 0) && (sourceImage.GetPixel(x + i, y + j).R < minR))
                             minR = sourceImage.GetPixel(x + i, y + j).R;
-                        if ((kernel[i + radiusX, j + radiusY]) && (sourceImage.GetPixel(x + i, y + j).G < minG))
+                        if ((mask[i + radiusX, j + radiusY] != 0) && (sourceImage.GetPixel(x + i, y + j).G < minG))
                             minG = sourceImage.GetPixel(x + i, y + j).G;
-                        if ((kernel[i + radiusX, j + radiusY]) && (sourceImage.GetPixel(x + i, y + j).B < minB))
+                        if ((mask[i + radiusX, j + radiusY] != 0) && (sourceImage.GetPixel(x + i, y + j).B < minB))
                             minB = sourceImage.GetPixel(x + i, y + j).B;
                     }
                 }
@@ -52,8 +55,8 @@ namespace Filters
         }
         public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
         {
-            int radiusX = kernel.GetLength(0) / 2;
-            int radiusY = kernel.GetLength(1) / 2;
+            int radiusX = mask.GetLength(0) / 2;
+            int radiusY = mask.GetLength(1) / 2;
             Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
             for (int i = radiusX; i < sourceImage.Width - radiusX; i++)
             {
@@ -72,11 +75,10 @@ namespace Filters
         public Dilation()
         {
             isDilation = true;
-            kernel = new bool[,] { { false, true, false }, { true, true, true }, { false, true, false } };
         }
-        public Dilation(bool[,] kernel)
+        public Dilation(int[,] mask)
         {
-            this.kernel = kernel;
+            this.mask = mask;
         }
     }
 
@@ -85,11 +87,10 @@ namespace Filters
         public Erosion()
         {
             isDilation = false;
-            kernel = new bool[,] { { false, true, false }, { true, true, true }, { false, true, false } };
         }
-        public Erosion(bool[,] kernel)
+        public Erosion(int[,] mask)
         {
-            this.kernel = kernel;
+            this.mask = mask;
         }
     }
 

@@ -15,7 +15,8 @@ namespace Filters
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
             Color c = sourceImage.GetPixel(x, y);
-            return Color.FromArgb(Clamp(c.R * Avg / R, 0, 255), Clamp(c.G * Avg / G, 0, 255), Clamp(c.B * Avg / B, 0, 255));
+            Color resultColor = Color.FromArgb(Clamp(c.R * Avg / R, 0, 255), Clamp(c.G * Avg / G, 0, 255), Clamp(c.B * Avg / B, 0, 255));
+            return resultColor;
         }
 
         public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
