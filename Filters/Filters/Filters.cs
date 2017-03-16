@@ -16,7 +16,7 @@ namespace Filters
             Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
             for (int i = 0; i < sourceImage.Width; i++)
             {
-                worker.ReportProgress((int)((float)i / resultImage.Width * 100));
+                worker.ReportProgress((int)((double)i / resultImage.Width * 100));
                 if (worker.CancellationPending)
                     return null;
                 for (int j = 0; j < sourceImage.Height; j++)
@@ -26,9 +26,7 @@ namespace Filters
         }
         public int Clamp(int value, int min, int max)
         {
-            if (value < min) return min;
-            if (value > max) return max;
-            return value;
+            return Math.Min(Math.Max(value, min), max);
         }
     }
 }

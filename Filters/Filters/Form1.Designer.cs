@@ -76,6 +76,7 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.topHatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.blackHatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.цветоваяКоррекцияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -127,7 +128,8 @@
             this.идеальныйОтражательToolStripMenuItem,
             this.серыйМирToolStripMenuItem,
             this.медианныйФильтрToolStripMenuItem,
-            this.линейнаяКоррекцияToolStripMenuItem});
+            this.линейнаяКоррекцияToolStripMenuItem,
+            this.цветоваяКоррекцияToolStripMenuItem});
             this.фильтрыToolStripMenuItem.Name = "фильтрыToolStripMenuItem";
             this.фильтрыToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
             this.фильтрыToolStripMenuItem.Text = "Фильтры";
@@ -458,6 +460,13 @@
             this.blackHatToolStripMenuItem.Text = "Black Hat";
             this.blackHatToolStripMenuItem.Click += new System.EventHandler(this.blackHatToolStripMenuItem_Click);
             // 
+            // цветоваяКоррекцияToolStripMenuItem
+            // 
+            this.цветоваяКоррекцияToolStripMenuItem.Name = "цветоваяКоррекцияToolStripMenuItem";
+            this.цветоваяКоррекцияToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
+            this.цветоваяКоррекцияToolStripMenuItem.Text = "Цветовая коррекция";
+            this.цветоваяКоррекцияToolStripMenuItem.Click += new System.EventHandler(this.цветоваяКоррекцияToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -532,6 +541,7 @@
         private System.Windows.Forms.ToolStripMenuItem линейнаяКоррекцияToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem topHatToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem blackHatToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem цветоваяКоррекцияToolStripMenuItem;
     }
 }
 

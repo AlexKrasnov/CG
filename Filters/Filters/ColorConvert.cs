@@ -9,10 +9,10 @@ namespace Filters
 {
     public struct HSVcolor
     {
-        public ushort h; // hue - тон // 0-359
-        public byte s; // saturation - насыщенность // 0-100
-        public byte v; // value - яркость // 0-100
-        public HSVcolor(ushort _h, byte _s, byte _v)
+        public int h; // hue - тон // 0-359
+        public int s; // saturation - насыщенность // 0-100
+        public int v; // value - яркость // 0-100
+        public HSVcolor(int _h, int _s, int _v)
         { h = _h; s = _s; v = _v; }
     }
     class ColorConvert
@@ -20,59 +20,56 @@ namespace Filters
         public Bitmap rgbImage;
         public HSVcolor[,] hsvImage;
 
-        byte clamp(byte value, byte min, byte max)
-        {
-            return Math.Min(Math.Max(value, min), max);
-        }
-        ushort clamp(ushort value, ushort min, ushort max)
+        int Clamp(int value, int min, int max)
         {
             return Math.Min(Math.Max(value, min), max);
         }
         public HSVcolor RGBtoHSV(Color sourse)
         {
-            float eps = 0.00001f; ushort hue = 0; byte saturation = 0, value = 0;
-            float R_ = sourse.R / 255f; float G_ = sourse.G / 255f; float B_ = sourse.B / 255f;
-            float CMax = Math.Max(R_, Math.Max(G_, B_));
-            float CMin = Math.Min(R_, Math.Min(G_, B_));
-            float delta = CMax - CMin;
-            value = (byte)(100 * CMax);
+            double eps = 0.00001;
+            int hue = 0, saturation = 0, value = 0;
+            double R_ = sourse.R / 255, G_ = sourse.G / 255, B_ = sourse.B / 255;
+            double CMax = Math.Max(R_, Math.Max(G_, B_));
+            double CMin = Math.Min(R_, Math.Min(G_, B_));
+            double delta = CMax - CMin;
 
+            value = (int)(100 * CMax);
             if (CMax < eps) saturation = 0;
-            else saturation = (byte)(100 * delta / CMax);
+            else saturation = (int)(100 * delta / CMax);
             if (delta < eps) hue = 0;
             else if (CMax == R_)
-                hue = (ushort)(60f * (((G_ - B_) / delta) % 6f));
+                hue = (int)(60 * (((G_ - B_) / delta) % 6));
             else if (CMax == G_)
-                hue = (ushort)(60f * (((B_ - R_) / delta) + 2f));
+                hue = (int)(60 * (((B_ - R_) / delta) + 2));
             else if (CMax == B_)
-                hue = (ushort)(60f * (((R_ - G_) / delta) + 4f));
-            return new HSVcolor(clamp(hue, 0, 359), saturation, value);
+                hue = (int)(60 * (((R_ - G_) / delta) + 4));
+            return new HSVcolor(Clamp(hue, 0, 359), Clamp(saturation, 0, 100), Clamp(value, 0, 100));
         }
         public Color HSVtoRGB(HSVcolor sourse)
         {
-            float R_ = 0f, G_ = 0f, B_ = 0f;
-            float C = sourse.s * sourse.v / 100f / 100f;
-            float X = C * (1 - Math.Abs((sourse.h / 60f) % 2f - 1));
-            float m = sourse.v / 100f - C;
+            double R_ = 0, G_ = 0, B_ = 0;
+            double C = sourse.s * sourse.v / 100 / 100;
+            double X = C * (1 - Math.Abs((sourse.h / 60) % 2 - 1));
+            double m = sourse.v / 100 - C;
 
             if (sourse.h < 60)
-            { R_ = C; G_ = X; B_ = 0f; }
+            { R_ = C; G_ = X; B_ = 0; }
             else if (sourse.h < 120)
-            { R_ = X; G_ = C; B_ = 0f; }
+            { R_ = X; G_ = C; B_ = 0; }
             else if (sourse.h < 180)
-            { R_ = 0f; G_ = C; B_ = X; }
+            { R_ = 0; G_ = C; B_ = X; }
             else if (sourse.h < 240)
-            { R_ = 0f; G_ = X; B_ = C; }
+            { R_ = 0; G_ = X; B_ = C; }
             else if (sourse.h < 300)
             { R_ = X; G_ = 0; B_ = C; }
             else if (sourse.h < 360)
             { R_ = C; G_ = 0; B_ = X; }
 
-            byte R = (byte)(255f * (R_ + m));
-            byte G = (byte)(255f * (G_ + m));
-            byte B = (byte)(255f * (B_ + m));
+            byte R = (byte)(255 * (R_ + m));
+            byte G = (byte)(255 * (G_ + m));
+            byte B = (byte)(255 * (B_ + m));
 
-            return Color.FromArgb(clamp(R, 0, 255), clamp(G, 0, 255), clamp(B, 0, 255));
+            return Color.FromArgb(Clamp(R, 0, 255), Clamp(G, 0, 255), Clamp(B, 0, 255));
         }
         public void ConvertRGBimagetoHSV()
         {

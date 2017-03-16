@@ -285,8 +285,8 @@ namespace Filters
 
         private void линейнаяКоррекцияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Filters filter = new LinearCorrection();
-            backgroundWorker1.RunWorkerAsync(filter);
+            //Filters filter = new LinearCorrection();
+            //backgroundWorker1.RunWorkerAsync(filter);
         }
 
         private void topHatToolStripMenuItem_Click(object sender, EventArgs e)
@@ -298,6 +298,12 @@ namespace Filters
         private void blackHatToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters filter = new BlackHat();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void цветоваяКоррекцияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new ColorCorrection();
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
