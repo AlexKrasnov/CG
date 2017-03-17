@@ -76,8 +76,8 @@ namespace Filters
             int width = rgbImage.Width;
             int height = rgbImage.Height;
             hsvImage = new HSVcolor[width, height];
-            for (int i = 0; i < width; ++i)
-                for (int j = 0; j < height; ++j)
+            for (int i = 0; i < width; i++)
+                for (int j = 0; j < height; j++)
                     hsvImage[i, j] = RGBtoHSV(rgbImage.GetPixel(i, j));
         }
         public void ConvertHSVimagetoRGB()
@@ -85,8 +85,8 @@ namespace Filters
             int width = hsvImage.GetLength(0);
             int height = hsvImage.GetLength(1);
             rgbImage = new Bitmap(width, height);
-            for (int i = 0; i < width; ++i)
-                for (int j = 0; j < height; ++j)
+            for (int i = 0; i < width; i++)
+                for (int j = 0; j < height; j++)
                     rgbImage.SetPixel(i, j, HSVtoRGB(hsvImage[i, j]));
         }
     }

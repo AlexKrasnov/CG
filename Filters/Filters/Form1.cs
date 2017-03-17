@@ -12,8 +12,9 @@ namespace Filters
 {
     public partial class Form1 : Form
     {
+        ColorConvert cc = new ColorConvert();
         public int[,] StructElem;
-        Bitmap image, resultimage;
+        public Bitmap image, resultimage;
         Stack<Bitmap> st1;
         Stack<Bitmap> st2;
         public Form1()
@@ -229,19 +230,19 @@ namespace Filters
 
         private void открытиеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Filters filter = new Opening(StructElem);
+            Filters filter = new Opening();
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
         private void закрытиеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Filters filter = new Closing(StructElem);
+            Filters filter = new Closing();
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
         private void градиентToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Filters filter = new Grad(StructElem);
+            Filters filter = new Grad();
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
@@ -288,13 +289,13 @@ namespace Filters
 
         private void topHatToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Filters filter = new TopHat(StructElem);
+            Filters filter = new TopHat();
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
         private void blackHatToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Filters filter = new BlackHat(StructElem);
+            Filters filter = new BlackHat();
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
@@ -312,6 +313,69 @@ namespace Filters
                 for (int j = 0; j < 3; j++)
                     StructElem[i, j] = F4.StructElem[i,j];
         }
+
+        //private void button3_Click(object sender, EventArgs e)
+        //{
+        //    st1.Push(resultimage);
+        //    cc.rgbImage = image;
+        //    this.Cursor = Cursors.WaitCursor;
+        //    cc.ConvertRGBimagetoHSV();
+        //    int width = cc.rgbImage.Width;
+        //    int height = cc.rgbImage.Height;
+        //    for (int i = 0; i < width; ++i)
+        //        for (int j = 0; j < height; ++j)
+        //        {
+        //            int tmpH = trackBar1.Value;
+        //            cc.hsvImage[i, j].h = tmpH;
+        //        }
+        //    trackBar1.Value = 0;
+        //    cc.ConvertHSVimagetoRGB();
+        //    resultimage = cc.rgbImage;
+        //    pictureBox2.Image = resultimage;
+        //    this.Cursor = Cursors.Default;
+        //}
+
+        //private void button2_Click(object sender, EventArgs e)
+        //{
+        //    st1.Push(resultimage);
+        //    cc.rgbImage = image;
+        //    this.Cursor = Cursors.WaitCursor;
+        //    cc.ConvertRGBimagetoHSV();
+        //    int width = cc.rgbImage.Width;
+        //    int height = cc.rgbImage.Height;
+        //    for (int i = 0; i < width; ++i)
+        //        for (int j = 0; j < height; ++j)
+        //        {
+        //            int tmpS = trackBar1.Value;
+        //            cc.hsvImage[i, j].s = tmpS;
+        //        }
+        //    trackBar1.Value = 0;
+        //    cc.ConvertHSVimagetoRGB();
+        //    resultimage = cc.rgbImage;
+        //    pictureBox2.Image = resultimage;
+        //    this.Cursor = Cursors.Default;
+        //}
+
+        //private void button4_Click(object sender, EventArgs e)
+        //{
+        //    st1.Push(resultimage);
+        //    cc.rgbImage = image;
+        //    this.Cursor = Cursors.WaitCursor;
+        //    cc.ConvertRGBimagetoHSV();
+        //    int width = cc.rgbImage.Width;
+        //    int height = cc.rgbImage.Height;
+        //    for (int i = 0; i < width; i++)
+        //        for (int j = 0; j < height; j++)
+        //        {
+        //            int tmpV = trackBar1.Value;
+        //            cc.hsvImage[i, j].v = tmpV;
+        //        }
+        //    trackBar1.Value = 0;
+        //    cc.ConvertHSVimagetoRGB();
+        //    resultimage = cc.rgbImage;
+        //    pictureBox2.Image = resultimage;
+        //    this.Cursor = Cursors.Default;
+        //}
 
         private void button1_Click(object sender, EventArgs e)
         {

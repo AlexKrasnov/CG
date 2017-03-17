@@ -79,6 +79,7 @@ namespace Filters
         public Dilation(int[,] mask)
         {
             this.mask = mask;
+            isDilation = true;
         }
     }
 
@@ -91,15 +92,16 @@ namespace Filters
         public Erosion(int[,] mask)
         {
             this.mask = mask;
+            isDilation = false;
         }
     }
 
     class Opening : Morfology // Морфологическое открытие
     {
-        public Opening(int[,] mask)
-        {
-            this.mask = mask;
-        }
+        //public Opening(int[,] mask)
+        //{
+        //    this.mask = mask;
+        //}
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
             return sourceImage.GetPixel(x, y);
@@ -117,10 +119,10 @@ namespace Filters
 
     class Closing : Morfology // Морфологическое закрытие
     {
-        public Closing(int[,] mask)
-        {
-            this.mask = mask;
-        }
+        //public Closing(int[,] mask)
+        //{
+        //    this.mask = mask;
+        //}
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
             return sourceImage.GetPixel(x, y);
@@ -138,10 +140,10 @@ namespace Filters
 
     class Grad : Morfology // Градиент
     {
-        public Grad(int[,] mask)
-        {
-            this.mask = mask;
-        }
+        //public Grad(int[,] mask)
+        //{
+        //    this.mask = mask;
+        //}
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
             return sourceImage.GetPixel(x, y);
@@ -172,10 +174,10 @@ namespace Filters
 
     class TopHat : Morfology // TopHat (цилиндр)
     {
-        public TopHat(int[,] mask)
-        {
-            this.mask = mask;
-        }
+        //public TopHat(int[,] mask)
+        //{
+        //    this.mask = mask;
+        //}
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
             return sourceImage.GetPixel(x, y);
@@ -204,10 +206,10 @@ namespace Filters
 
     class BlackHat : Morfology // BlackHat (эффект черной шляпы)
     {
-        public BlackHat(int[,] mask)
-        {
-            this.mask = mask;
-        }
+        //public BlackHat(int[,] mask)
+        //{
+        //    this.mask = mask;
+        //}
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
             return sourceImage.GetPixel(x, y);
