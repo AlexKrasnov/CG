@@ -48,7 +48,7 @@ namespace Filters
                     int R = sourceImage.GetPixel(i, j).R;
                     int G = sourceImage.GetPixel(i, j).G;
                     int B = sourceImage.GetPixel(i, j).B;
-                    result.SetPixel(i, j, Color.FromArgb(Clamp(F(R, XmaxR, XminR) + R, 0 , 255), Clamp(F(G, XmaxG, XminG) + G, 0 , 255), Clamp(F(B, XmaxB, XminB) + B, 0 , 255)));
+                    result.SetPixel(i, j, Color.FromArgb(Clamp(F(R, XmaxR, XminR) + R, 0, 255), Clamp(F(G, XmaxG, XminG) + G, 0, 255), Clamp(F(B, XmaxB, XminB) + B, 0, 255)));
                 }
             }
             return result;

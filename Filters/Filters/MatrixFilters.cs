@@ -35,7 +35,7 @@ namespace Filters
         }
     }
 
-    class BlurFilter : MatrixFilters // Размытие
+    class BlurFilter : MatrixFilters // Размытие (BoxFilter - усреднение)
     {
         public BlurFilter()
         {

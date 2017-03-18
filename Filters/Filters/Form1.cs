@@ -314,6 +314,14 @@ namespace Filters
                     StructElem[i, j] = F4.StructElem[i,j];
         }
 
+        private void адаптивныйToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form5 F5 = new Form5();
+            F5.ShowDialog();
+            Filters filter = new AdaptiveFilter(F5.radius, F5.threshold);
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
         //private void button3_Click(object sender, EventArgs e)
         //{
         //    st1.Push(resultimage);

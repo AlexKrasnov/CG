@@ -77,6 +77,7 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.адаптивныйToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -129,7 +130,8 @@
             this.серыйМирToolStripMenuItem,
             this.медианныйФильтрToolStripMenuItem,
             this.линейнаяКоррекцияToolStripMenuItem,
-            this.цветоваяКоррекцияToolStripMenuItem});
+            this.цветоваяКоррекцияToolStripMenuItem,
+            this.адаптивныйToolStripMenuItem});
             this.фильтрыToolStripMenuItem.Name = "фильтрыToolStripMenuItem";
             this.фильтрыToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
             this.фильтрыToolStripMenuItem.Text = "Фильтры";
@@ -467,6 +469,13 @@
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
+            // адаптивныйToolStripMenuItem
+            // 
+            this.адаптивныйToolStripMenuItem.Name = "адаптивныйToolStripMenuItem";
+            this.адаптивныйToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
+            this.адаптивныйToolStripMenuItem.Text = "Адаптивный";
+            this.адаптивныйToolStripMenuItem.Click += new System.EventHandler(this.адаптивныйToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -542,6 +551,7 @@
         private System.Windows.Forms.ToolStripMenuItem blackHatToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem цветоваяКоррекцияToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem задатьСтруктурныйЭлементToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem адаптивныйToolStripMenuItem;
     }
 }
 
