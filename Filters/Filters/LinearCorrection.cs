@@ -12,7 +12,7 @@ namespace Filters
     {
         private int F(int y, int yMax, int yMin)
         {
-            return Clamp(((y - yMin) * (255 / (yMax - yMin))), 0, 255);
+            return Clamp(((255 * (y - yMin)) / (yMax - yMin)), 0, 255);
         }
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
@@ -20,14 +20,24 @@ namespace Filters
         }
         public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
         {
-            Bitmap result = new Bitmap(sourceImage);
-            // беру значения цвета верхнего правого и левого нижнего угла с отступом
-            int XminR = sourceImage.GetPixel(1, 1).R;
-            int XminG = sourceImage.GetPixel(1, 1).G;
-            int XminB = sourceImage.GetPixel(1, 1).B;
-            int XmaxR = sourceImage.GetPixel(sourceImage.Width - 1, sourceImage.Height - 1).R;
-            int XmaxG = sourceImage.GetPixel(sourceImage.Width - 1, sourceImage.Height - 1).G;
-            int XmaxB = sourceImage.GetPixel(sourceImage.Width - 1, sourceImage.Height - 1).B;
+            Bitmap result = new Bitmap(sourceImage.Width, sourceImage.Height);
+            int XminR = 0, XmaxR = 0, XmaxG = 0, XminG = 0, XmaxB = 0, XminB = 0;
+            for (int i = 0; i < sourceImage.Width; i++)
+            {
+                worker.ReportProgress((int)((float)i / sourceImage.Width * 100));
+                if (worker.CancellationPending)
+                    return null;
+                for (int j = 0; j < sourceImage.Height; j++)
+                {
+                    Color pixColor = sourceImage.GetPixel(i, j);
+                    if (XminR > pixColor.R) XminR = pixColor.R;
+                    if (XmaxR < pixColor.R) XmaxR = pixColor.R;
+                    if (XminG > pixColor.G) XminG = pixColor.G;
+                    if (XmaxG < pixColor.G) XmaxG = pixColor.G;
+                    if (XminB > pixColor.B) XminB = pixColor.B;
+                    if (XmaxB < pixColor.B) XmaxB = pixColor.B;
+                }
+            }
             for (int i = 0; i < sourceImage.Width; i++)
             {
                 worker.ReportProgress((int)((float)i / sourceImage.Width * 100));
@@ -38,7 +48,7 @@ namespace Filters
                     int R = sourceImage.GetPixel(i, j).R;
                     int G = sourceImage.GetPixel(i, j).G;
                     int B = sourceImage.GetPixel(i, j).B;
-                    result.SetPixel(i, j, Color.FromArgb(F(R, XmaxR, XminR), F(G, XmaxG, XminG), F(B, XmaxB, XminB)));
+                    result.SetPixel(i, j, Color.FromArgb(Clamp(F(R, XmaxR, XminR) + R, 0 , 255), Clamp(F(G, XmaxG, XminG) + G, 0 , 255), Clamp(F(B, XmaxB, XminB) + B, 0 , 255)));
                 }
             }
             return result;

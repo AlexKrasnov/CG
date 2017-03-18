@@ -29,7 +29,7 @@ namespace Filters
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Filter = "Image Files | *.png; *.jpg; *.bmp; | All Files (*.*)| *.*";
+            dialog.Filter = "Image Files | *.png; *.jpg; *.bmp; *.gif; | All Files (*.*)| *.*";
             dialog.Title = "Сохранение файла";
             if (pictureBox2.Image != null)
             {
@@ -46,7 +46,7 @@ namespace Filters
         private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "Image Files | *.png; *.jpg; *.bmp; | All Files (*.*)| *.*";
+            dialog.Filter = "Image Files | *.png; *.jpg; *.bmp; *.gif; | All Files (*.*)| *.*";
             dialog.Title = "Открытие файла";
             if (dialog.ShowDialog() == DialogResult.OK)
             {
