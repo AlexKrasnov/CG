@@ -12,6 +12,7 @@ namespace OpenGL
 {
     public partial class Form1 : Form
     {
+        Bin file = new Bin();
         public Form1()
         {
             InitializeComponent();

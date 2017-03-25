@@ -35,6 +35,9 @@
             // simpleOpenGlControl1
             // 
             this.simpleOpenGlControl1.AccumBits = ((byte)(0));
+            this.simpleOpenGlControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.simpleOpenGlControl1.AutoCheckErrors = false;
             this.simpleOpenGlControl1.AutoFinish = false;
             this.simpleOpenGlControl1.AutoMakeCurrent = true;
