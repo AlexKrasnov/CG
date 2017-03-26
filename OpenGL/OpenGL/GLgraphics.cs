@@ -20,6 +20,8 @@ namespace OpenGL
         public float longitude = 60.41f;
         public float radius = 5.385f;
 
+        float rotateAngle;
+
         public void Setup(int width, int height)
         {
             GL.ClearColor(Color.DarkGray); // заливка буфера серым цветом
@@ -44,7 +46,7 @@ namespace OpenGL
     (float)(radius * Math.Cos(Math.PI / 180.0f * latitude) * Math.Cos(Math.PI / 180.0f * longitude)),
     (float)(radius * Math.Cos(Math.PI / 180.0f * latitude) * Math.Sin(Math.PI / 180.0f * longitude)),
     (float)(radius * Math.Sin(Math.PI / 180.0f * latitude)));
-
+            rotateAngle += 0.1f;
         }
 
         private void drawTestQuad()
@@ -64,6 +66,12 @@ namespace OpenGL
         public void Render()
         {
             drawTestQuad();
+            GL.PushMatrix();
+            GL.Translate(1, 1, 1);
+            GL.Rotate(rotateAngle, Vector3.UnitZ);
+            GL.Scale(0.5f, 0.5f, 0.5f);
+            drawTestQuad();
+            GL.PopMatrix();
         }
     }
 }

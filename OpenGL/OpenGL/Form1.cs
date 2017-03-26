@@ -37,7 +37,7 @@ namespace OpenGL
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            Application.Idle += Application_Idle;
         }
 
         private void Form1_Resize(object sender, EventArgs e)
@@ -52,5 +52,12 @@ namespace OpenGL
             glgraphics.latitude = heightCoef * 180;
             glgraphics.longitude = widthCoef * 360;
         }
+
+        void Application_Idle(object sender, EventArgs e)
+        {
+            while (glControl1.IsIdle)
+                glControl1.Refresh();
+        }
+
     }
 }
