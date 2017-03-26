@@ -32,17 +32,15 @@ namespace OpenGL
             return Max(0, Min(value, max));
         }
 
-        Color TransferFunction(short value) // функция перевода значения плотностей томограммы в цвет
+        Color TransferFunction(short value, int max, int min) // функция перевода значения плотностей томограммы в цвет
         {
-            int min = 0;
-            int max = 77;
             int newval = Clamp((value - min) * 255 / (max - min), 0, 255);
             return Color.FromArgb(newval, newval, newval);
         }
 
         // Режим 1 - отрисовка четырёхугольниками
         #region Regime1_Quads
-        public void DrawQuads(int layerNumber)
+        public void DrawQuads(int layerNumber, int max, int min)
         {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             GL.Begin(BeginMode.Quads);
@@ -53,29 +51,28 @@ namespace OpenGL
 
                     // 1 вершина
                     value = Bin.array[x + y * Bin.X + layerNumber * Bin.X * Bin.Y];
-                    GL.Color3(TransferFunction(value));
+                    GL.Color3(TransferFunction(value, max, min));
                     GL.Vertex2(x, y);
 
                     // 2 вершина
                     value = Bin.array[x + (y + 1) * Bin.X + layerNumber * Bin.X * Bin.Y];
-                    GL.Color3(TransferFunction(value));
+                    GL.Color3(TransferFunction(value, max, min));
                     GL.Vertex2(x, y + 1);
 
                     // 3 вершина
                     value = Bin.array[x + 1 + (y + 1) * Bin.X + layerNumber * Bin.X * Bin.Y];
-                    GL.Color3(TransferFunction(value));
+                    GL.Color3(TransferFunction(value, max, min));
                     GL.Vertex2(x + 1, y + 1);
 
                     // 4 вершина
                     value = Bin.array[x + 1 + y * Bin.X + layerNumber * Bin.X * Bin.Y];
-                    GL.Color3(TransferFunction(value));
+                    GL.Color3(TransferFunction(value, max, min));
                     GL.Vertex2(x + 1, y);
                 }
-
             GL.End();
         }
 
-        public void QuadStrip(int layerNumber)
+        public void QuadStrip(int layerNumber, int max, int min)
         {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             GL.Begin(BeginMode.Quads);
@@ -83,23 +80,23 @@ namespace OpenGL
             for (int x = 0; x < Bin.X - 1; x++)
             {
                 value = Bin.array[x + layerNumber * Bin.X * Bin.Y];
-                GL.Color3(TransferFunction(value));
+                GL.Color3(TransferFunction(value, max, min));
                 GL.Vertex2(x, 0);
 
                 for (int y = 0; y < Bin.Y - 1; y++)
                 {
                     //  добавляем 2 вершины к 4-угольнику
                     value = Bin.array[x + (y + 1) * Bin.X + layerNumber * Bin.X * Bin.Y];
-                    GL.Color3(TransferFunction(value));
+                    GL.Color3(TransferFunction(value, max, min));
                     GL.Vertex2(x, y + 1);
 
                     value = Bin.array[x + 1 + (y + 1) * Bin.X + layerNumber * Bin.X * Bin.Y];
-                    GL.Color3(TransferFunction(value));
+                    GL.Color3(TransferFunction(value, max, min));
                     GL.Vertex2(x + 1, y + 1);
                 }
             }
             value = Bin.array[Bin.X - 1 + layerNumber * Bin.X * Bin.Y];
-            GL.Color3(TransferFunction(value));
+            GL.Color3(TransferFunction(value, max, min));
             GL.Vertex2(Bin.X - 1, 0);
 
             GL.End();
@@ -130,14 +127,14 @@ namespace OpenGL
             string str = Er.ToString();
         }
 
-        public void generateTextureImage(int LayerNumber) // генерация изображения из томограммы
+        public void generateTextureImage(int LayerNumber, int max, int min) // генерация изображения из томограммы
         {
             textureImage = new Bitmap(Bin.X, Bin.Y);
             for (int i = 0; i < Bin.X; i++)
                 for (int j = 0; j < Bin.Y; j++)
                 {
                     int PixelNumber = i + j * Bin.X + LayerNumber * Bin.X * Bin.Y;
-                    textureImage.SetPixel(i, j, TransferFunction(Bin.array[PixelNumber]));
+                    textureImage.SetPixel(i, j, TransferFunction(Bin.array[PixelNumber], max, min));
                 }
         }
 
