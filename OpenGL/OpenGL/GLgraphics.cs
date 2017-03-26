@@ -36,6 +36,7 @@ namespace OpenGL
                 MathHelper.PiOver4, width / (float)height, 1, 64);
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadMatrix(ref perspectiveMat);
+            SetupLightning();
         }
 
         public void Update()
@@ -123,6 +124,24 @@ namespace OpenGL
             GL.Vertex3(1.0f, -1.0f, -1.0f);
             GL.End();
             GL.Disable(EnableCap.Texture2D);
+        }
+
+        void SetupLightning()
+        {
+            GL.Enable(EnableCap.Lighting);
+            GL.Enable(EnableCap.Light0);
+            GL.Enable(EnableCap.ColorMaterial);
+            Vector4 lightPosition = new Vector4(1.0f, 1.0f, 4.0f, 0.0f);
+            GL.Light(LightName.Light0, LightParameter.Position, lightPosition);
+            Vector4 ambientColor = new Vector4(0.2f, 0.2f, 0.2f, 1.0f);
+            GL.Light(LightName.Light0, LightParameter.Ambient, ambientColor);
+            Vector4 diffuseColor = new Vector4(0.6f, 0.6f, 0.6f, 1.0f);
+            GL.Light(LightName.Light0, LightParameter.Diffuse, diffuseColor);
+            Vector4 materialSpecular = new Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+            GL.Material(MaterialFace.Front, MaterialParameter.Specular, materialSpecular);
+            float materialShininess = 100;
+            GL.Material(MaterialFace.Front, MaterialParameter.Shininess, materialShininess);
+
         }
 
     }
