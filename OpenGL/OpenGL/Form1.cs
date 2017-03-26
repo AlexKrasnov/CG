@@ -12,31 +12,44 @@ namespace OpenGL
 {
     public partial class Form1 : Form
     {
+        bool IsTexture = false;
         Bin binfile = new Bin();
         View view = new View();
-        bool loaded = new bool();
-        int currentLayer;
+        bool loaded = false;
+        bool needReload = false;
+        int currentLayer = 1;
         int FrameCount;
         DateTime NextFPSUpdate = DateTime.Now.AddSeconds(1);
+
         public Form1()
         {
             InitializeComponent();
         }
-        
+
         private void simpleOpenGlControl1_Paint(object sender, PaintEventArgs e)
         {
-            //if (loaded)
-            //{
-            //    view.DrawQuads(currentLayer);
-            //    simpleOpenGlControl1.SwapBuffers();
-            //}
+            if (loaded)
+            {
+                //view.DrawQuads(currentLayer);
+
+                if (needReload)
+                {
+                    view.generateTextureImage(currentLayer);
+                    view.Load2DTexture();
+                    needReload = false;
+                }
+                view.DrawTexture();
+                simpleOpenGlControl1.SwapBuffers();
+            }
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             currentLayer = trackBar1.Value;
-            view.DrawQuads(currentLayer);
-            simpleOpenGlControl1.SwapBuffers();
+            //simpleOpenGlControl1.Refresh();
+            //view.DrawQuads(currentLayer);
+            //simpleOpenGlControl1.SwapBuffers();
+            needReload = true;
         }
 
         private void открытьФайлToolStripMenuItem_Click(object sender, EventArgs e)
@@ -46,15 +59,16 @@ namespace OpenGL
             dialog.Title = "Открытие файла";
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                currentLayer = 0;
                 string str = dialog.FileName;
                 binfile.ReadBIN(str);
                 MessageBox.Show("Бинарник обработан!", "Ура!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 view.SetupView(simpleOpenGlControl1.Width, simpleOpenGlControl1.Height);
                 loaded = true;
                 simpleOpenGlControl1.Invalidate();
-                view.DrawQuads(currentLayer);
-                simpleOpenGlControl1.SwapBuffers();
+                view.generateTextureImage(0);
+                view.Load2DTexture();
+                //view.DrawQuads(currentLayer);
+                //simpleOpenGlControl1.SwapBuffers();
                 //simpleOpenGlControl1.Refresh();
             }
         }
@@ -86,13 +100,13 @@ namespace OpenGL
 
         private void Form1_Resize(object sender, EventArgs e)
         {
-            if (loaded)
-            {
-                view.SetupView(simpleOpenGlControl1.Width, simpleOpenGlControl1.Height);
-                simpleOpenGlControl1.Invalidate();
-                view.DrawQuads(currentLayer);
-                simpleOpenGlControl1.SwapBuffers();
-            }
+            //if (loaded)
+            //{
+            //    view.SetupView(simpleOpenGlControl1.Width, simpleOpenGlControl1.Height);
+            //    simpleOpenGlControl1.Invalidate();
+            //    view.DrawQuads(currentLayer);
+            //    simpleOpenGlControl1.SwapBuffers();
+            //}
         }
     }
 }

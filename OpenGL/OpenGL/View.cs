@@ -15,60 +15,9 @@ namespace OpenGL
     {
         Bitmap textureImage;
         int VBOtexture; // номер текстуры в памяти видеокарты
-        public void Load2DTexture()
+
+        public void SetupView(int width, int height) // настройки камеры
         {
-            GL.BindTexture(TextureTarget.Texture2D, VBOtexture);
-            BitmapData data = textureImage.LockBits(
-                new Rectangle(0, 0, textureImage.Width, textureImage.Height),
-                ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba,
-                data.Width, data.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra,
-                PixelType.UnsignedByte, data.Scan0); // загружает текстуру в память видеокарты
-            textureImage.UnlockBits(data);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter,
-                (int)TextureMinFilter.Linear);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter,
-                (int)TextureMinFilter.Linear);
-            ErrorCode Er = GL.GetError();
-            string str = Er.ToString();
-        }
-
-        public void generateTextureImage(int LayerNumber) // генерация изображения из томограммы
-        {
-            textureImage = new Bitmap(Bin.X, Bin.Y);
-            for (int i = 0; i < Bin.X; i++)
-                for (int j = 0; j < Bin.Y; j++)
-                {
-                    int PixelNumber = i + j * Bin.X + LayerNumber * Bin.X * Bin.Y;
-                    textureImage.SetPixel(i, j, TransferFunction(Bin.array[PixelNumber]));
-                }
-        }
-
-        public void DrawTexture()
-        {
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-            GL.Enable(EnableCap.Texture2D); // включение 2D-текстурирования
-            GL.BindTexture(TextureTarget.Texture2D, VBOtexture);
-
-            // отрисовка прямоугольника с наложенной структурой
-            GL.Begin(BeginMode.Quads);
-            GL.Color3(Color.White);
-            GL.TexCoord2(0f, 0f);
-            GL.Vertex2(0, 0);
-            GL.TexCoord2(0f, 1f);
-            GL.Vertex2(0, Bin.Y);
-            GL.TexCoord2(1f, 1f);
-            GL.Vertex2(Bin.X, Bin.Y);
-            GL.TexCoord2(1f, 0f);
-            GL.Vertex2(Bin.X, 0);
-            GL.End();
-
-            GL.Disable(EnableCap.Texture2D); // выключение 2D-текстурирования
-        }
-
-        public void SetupView(int width, int height)
-        {
-            //currentLayer = 0;
             GL.ShadeModel(ShadingModel.Smooth); // интерполирование цветов
             GL.MatrixMode(MatrixMode.Projection); // инициализация матрицы проекции
             GL.LoadIdentity(); // делаем матрицу равной тождественному преобразованию
@@ -78,19 +27,21 @@ namespace OpenGL
                                               // и высоты доступной области на экране
         }
 
-        int Clamp(int value, int min, int max)
+        int Clamp(int value, int min, int max) // коррекция значения
         {
             return Max(0, Min(value, max));
         }
 
-        Color TransferFunction(short value)
+        Color TransferFunction(short value) // функция перевода значения плотностей томограммы в цвет
         {
             int min = 0;
-            int max = 2000;
+            int max = 77;
             int newval = Clamp((value - min) * 255 / (max - min), 0, 255);
             return Color.FromArgb(newval, newval, newval);
         }
 
+        // Режим 1 - отрисовка четырёхугольниками
+        #region Regime1_Quads
         public void DrawQuads(int layerNumber)
         {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
@@ -153,5 +104,64 @@ namespace OpenGL
 
             GL.End();
         }
+        #endregion
+
+        // Режим 2 - отрисовка текстурой
+        #region Regime2_Textures
+        public void Load2DTexture() // загрузка текстуры в память видеокарты
+        {
+            // Текущий слой томограммы визуализируется
+            // как один большой четырехугольник, на который изображение слоя
+            // накладывается как текстура аппаратной билинейной интерполяцией
+            GL.BindTexture(TextureTarget.Texture2D, VBOtexture); // связывает текстуру, 
+                                                                 // делает её активной
+            BitmapData data = textureImage.LockBits( // блокирует системную память
+                new Rectangle(0, 0, textureImage.Width, textureImage.Height),
+                ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba,
+                data.Width, data.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra,
+                PixelType.UnsignedByte, data.Scan0); // загружает текстуру в память видеокарты
+            textureImage.UnlockBits(data); // разблокирует из системной памяти
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter,
+                (int)TextureMinFilter.Linear);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter,
+                (int)TextureMinFilter.Linear);
+            ErrorCode Er = GL.GetError();
+            string str = Er.ToString();
+        }
+
+        public void generateTextureImage(int LayerNumber) // генерация изображения из томограммы
+        {
+            textureImage = new Bitmap(Bin.X, Bin.Y);
+            for (int i = 0; i < Bin.X; i++)
+                for (int j = 0; j < Bin.Y; j++)
+                {
+                    int PixelNumber = i + j * Bin.X + LayerNumber * Bin.X * Bin.Y;
+                    textureImage.SetPixel(i, j, TransferFunction(Bin.array[PixelNumber]));
+                }
+        }
+
+        public void DrawTexture()
+        {
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+            GL.Enable(EnableCap.Texture2D); // включение 2D-текстурирования
+            GL.BindTexture(TextureTarget.Texture2D, VBOtexture);
+
+            // отрисовка одного прямоугольника с наложенной структурой
+            GL.Begin(BeginMode.Quads);
+            GL.Color3(Color.White);
+            GL.TexCoord2(0f, 0f);
+            GL.Vertex2(0, 0);
+            GL.TexCoord2(0f, 1f);
+            GL.Vertex2(0, Bin.Y);
+            GL.TexCoord2(1f, 1f);
+            GL.Vertex2(Bin.X, Bin.Y);
+            GL.TexCoord2(1f, 0f);
+            GL.Vertex2(Bin.X, 0);
+            GL.End();
+
+            GL.Disable(EnableCap.Texture2D); // выключение 2D-текстурирования
+        }
+        #endregion
     }
 }
