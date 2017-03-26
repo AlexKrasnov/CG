@@ -76,8 +76,9 @@ namespace OpenGL
             GL.Scale(0.5f, 0.5f, 0.5f);
             //drawTestQuad();
             drawTexturedQuad();
+            GL.Color3(Color.BlueViolet);
+            DrawSphere(1.0f, 20, 20);
             GL.PopMatrix();
-            
         }
 
         public int LoadTexture(String filePath)
@@ -142,6 +143,31 @@ namespace OpenGL
             float materialShininess = 100;
             GL.Material(MaterialFace.Front, MaterialParameter.Shininess, materialShininess);
 
+        }
+
+        private void DrawSphere(double r, int nx, int ny)
+        {
+            int ix, iy;
+            double x, y, z;
+            for (iy = 0; iy < ny; ++iy)
+            {
+                GL.Begin(BeginMode.QuadStrip);
+                for (ix = 0; ix <= nx; ++ix)
+                {
+                    x = r * Math.Sin(iy * Math.PI / ny) * Math.Cos(2 * ix * Math.PI / nx);
+                    y = r * Math.Sin(iy * Math.PI / ny) * Math.Sin(2 * ix * Math.PI / nx);
+                    z = r * Math.Cos(iy * Math.PI / ny);
+                    GL.Normal3(x, y, z);
+                    GL.Vertex3(x, y, z);
+
+                    x = r * Math.Sin((iy + 1) * Math.PI / ny) * Math.Cos(2 * ix * Math.PI / nx);
+                    y = r * Math.Sin((iy + 1) * Math.PI / ny) * Math.Sin(2 * ix * Math.PI / nx);
+                    z = r * Math.Cos((iy + 1) * Math.PI / ny);
+                    GL.Normal3(x, y, z);
+                    GL.Vertex3(x, y, z);
+                }
+                GL.End();
+            }
         }
 
     }
