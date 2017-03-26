@@ -9,7 +9,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using static System.Math;
 
-namespace OpenGL
+namespace Tomogramm
 {
     class View
     {

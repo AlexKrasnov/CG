@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace OpenGL
+namespace Tomogramm
 {
     class Bin
     {
