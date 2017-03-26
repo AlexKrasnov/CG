@@ -16,6 +16,10 @@ namespace OpenGL
         Vector3 cameraDirecton = new Vector3(0, 0, 0);
         Vector3 cameraUp = new Vector3(0, 0, 1);
 
+        public float latitude = 47.98f;
+        public float longitude = 60.41f;
+        public float radius = 5.385f;
+
         public void Setup(int width, int height)
         {
             GL.ClearColor(Color.DarkGray); // заливка буфера серым цветом
@@ -36,6 +40,11 @@ namespace OpenGL
             GL.MatrixMode(MatrixMode.Modelview);
             GL.LoadMatrix(ref viewMat);
             Render();
+            cameraPosition = new Vector3(
+    (float)(radius * Math.Cos(Math.PI / 180.0f * latitude) * Math.Cos(Math.PI / 180.0f * longitude)),
+    (float)(radius * Math.Cos(Math.PI / 180.0f * latitude) * Math.Sin(Math.PI / 180.0f * longitude)),
+    (float)(radius * Math.Sin(Math.PI / 180.0f * latitude)));
+
         }
 
         private void drawTestQuad()
