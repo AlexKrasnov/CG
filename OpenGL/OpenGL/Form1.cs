@@ -31,6 +31,7 @@ namespace OpenGL
         private void glControl1_Load(object sender, EventArgs e)
         {
             GLgraphics glgraphics = new GLgraphics();
+
         }
         
         

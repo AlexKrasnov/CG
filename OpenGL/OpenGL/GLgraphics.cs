@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Drawing.Imaging;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
 
@@ -21,6 +22,8 @@ namespace OpenGL
         public float radius = 5.385f;
 
         float rotateAngle;
+
+        public List<int> texturesIDs = new List<int>();
 
         public void Setup(int width, int height)
         {
@@ -70,8 +73,57 @@ namespace OpenGL
             GL.Translate(1, 1, 1);
             GL.Rotate(rotateAngle, Vector3.UnitZ);
             GL.Scale(0.5f, 0.5f, 0.5f);
-            drawTestQuad();
+            //drawTestQuad();
+            drawTexturedQuad();
             GL.PopMatrix();
+            
         }
+
+        public int LoadTexture(String filePath)
+        {
+            try
+            {
+                Bitmap image = new Bitmap(filePath);
+                int texID = GL.GenTexture();
+                GL.BindTexture(TextureTarget.Texture2D, texID);
+                BitmapData data = image.LockBits(
+                    new System.Drawing.Rectangle(0, 0, image.Width, image.Height),
+                    ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                GL.TexImage2D(TextureTarget.Texture2D, 0,
+                    PixelInternalFormat.Rgba, data.Width, data.Height, 0,
+                    OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, data.Scan0);
+                image.UnlockBits(data);
+                GL.GenerateMipmap(GenerateMipmapTarget.Texture2D);
+                return texID;
+            }
+            catch (System.IO.FileNotFoundException е)
+            {
+                return -1;
+            }
+        }
+
+        private void drawTexturedQuad()
+        {
+            int texID = LoadTexture("..\\..\\..\\img\\unn.jpg");
+            texturesIDs.Add(texID);
+            GL.Enable(EnableCap.Texture2D);
+            GL.BindTexture(TextureTarget.Texture2D, texturesIDs[0]);
+            GL.Begin(PrimitiveType.Quads);
+            GL.Color3(Color.Blue);
+            GL.TexCoord2(0.0, 0.0);
+            GL.Vertex3(-1.0f, -1.0f, -1.0f);
+            GL.Color3(Color.Red);
+            GL.TexCoord2(0.0, 1.0);
+            GL.Vertex3(-1.0f, 1.0f, -1.0f);
+            GL.Color3(Color.White);
+            GL.TexCoord2(1.0, 1.0);
+            GL.Vertex3(1.0f, 1.0f, -1.0f);
+            GL.Color3(Color.Green);
+            GL.TexCoord2(1.0, 0.0);
+            GL.Vertex3(1.0f, -1.0f, -1.0f);
+            GL.End();
+            GL.Disable(EnableCap.Texture2D);
+        }
+
     }
 }
