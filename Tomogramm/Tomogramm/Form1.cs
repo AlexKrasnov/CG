@@ -18,7 +18,7 @@ namespace Tomogramm
         bool loaded = false;
         bool needReload = false;
         int currentLayer = 0;
-        int currentMax = 2000;
+        int currentMax = 1;
         int currentMin = 0;
         int FrameCount;
         DateTime NextFPSUpdate = DateTime.Now.AddSeconds(1);
