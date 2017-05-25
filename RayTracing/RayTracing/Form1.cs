@@ -22,11 +22,10 @@ namespace RayTracing
 
         int vbo_position; // хранение дескриптора объекта массива вершин
         int attribute_vpos; // передаётся из приложения в вершинный шейдер
-        int attribute_rotate; // Адрес параметра вращения сферы
+        int attribute_rotate; // Адрес параметраб задающего движение сферы
 
-        float angle = 0;
-
-        Vector3 Rotate; // Для вращения сферы
+        float angle = 0; // Угол
+        Vector3 Rotate; // Задаёт движение сферы
 
         void loadShader(String filename, ShaderType type, int program, out int address)
         {

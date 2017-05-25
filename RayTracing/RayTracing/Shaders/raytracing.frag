@@ -188,15 +188,6 @@ void initializeDefaultScene( out STriangle triangles[12],  out SSphere spheres[2
 	triangles[11].v2 = vec3(-5.0, 5.0, -5.0);
 	triangles[11].v3 = vec3( 5.0,-5.0, -5.0);
 	triangles[11].MaterialIdx = 5;
-
-	//triangles[12].v1 = vec3(-5.0,-5.0, -5.0);
-	//triangles[12].v2 = vec3( 5.0,-5.0, -5.0);
-	//triangles[12].v3 = vec3(-5.0, 5.0, -5.0);
-	//triangles[12].MaterialIdx = 5;
-	//triangles[13].v1 = vec3( 5.0, 5.0, -5.0);
-	//triangles[13].v2 = vec3(-5.0, 5.0, -5.0);
-	//triangles[13].v3 = vec3( 5.0,-5.0, -5.0);
-	//triangles[13].MaterialIdx = 5;
 	
 	/** SPHERES **/
 	//spheres[0].Center = vec3(-1.0,-1.0,-1.0);
@@ -343,8 +334,9 @@ void initializeDefaultLightMaterials(out SLight light, out SMaterial materials[8
 	materials[1].LightCoeffs = vec4(lightCoefs);
 	materials[1].ReflectionCoef = 0.5;
 	materials[1].RefractionCoef = 1.0;
-	materials[1].MaterialType = DIFFUSE;
-	
+	//materials[1].MaterialType = DIFFUSE;
+	materials[1].MaterialType = MIRROR_REFLECTION; // нижняя стенка прозрачная
+
 	materials[2].Color = vec3(0, 0.0, 1.0);
 	materials[2].LightCoeffs = vec4(lightCoefs);
 	materials[2].ReflectionCoef = 0.5;
